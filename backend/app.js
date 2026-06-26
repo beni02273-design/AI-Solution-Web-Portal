@@ -30,7 +30,7 @@ app.use('/api/notifications', require('./src/routes/notificationRoutes'));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Fallback to frontend index.html for SPA router
-app.get('*', (req, res) => {
+app.get('*any', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend', 'index.html'));
 });
 

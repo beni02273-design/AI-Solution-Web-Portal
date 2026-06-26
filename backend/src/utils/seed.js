@@ -12,7 +12,7 @@ const SiteSettings = require('../models/SiteSettings');
 const Inquiry = require('../models/Inquiry');
 const Notification = require('../models/Notification');
 
-dotenv.config({ path: path.join(__dirname, '../../../.env') });
+dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const seedDB = async () => {
   try {

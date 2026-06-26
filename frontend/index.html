@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Solutions — AI software for the digital employee experience</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom configuration for Tailwind -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              deep: '#080B10',
+              darker: '#0E131F',
+              dark: '#151D30',
+              indigo: '#6366F1',
+              cyan: '#06B6D4',
+              violet: '#8B5CF6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-brand-deep text-slate-100 min-h-screen flex flex-col antialiased">
+  
+  <!-- Glow Background blobs for atmospheric depth -->
+  <div class="glow-bg top-0 left-1/4"></div>
+  <div class="glow-bg bottom-0 right-1/4"></div>
+
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-navbar transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo -->
+        <a href="#home" class="flex items-center space-x-2 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo via-brand-violet to-brand-cyan p-[1.5px] flex items-center justify-center shadow-lg shadow-brand-indigo/20">
+            <div class="w-full h-full bg-brand-deep rounded-[10px] flex items-center justify-center">
+              <i data-lucide="sparkles" class="w-5 h-5 text-brand-indigo group-hover:rotate-12 transition-transform duration-300"></i>
+            </div>
+          </div>
+          <span class="text-xl sm:text-2xl font-bold tracking-tight text-white">AI-<span class="text-brand-indigo">Solutions</span></span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Home</a>
+          <a href="#about" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">About Us</a>
+          <a href="#services" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Services</a>
+          <a href="#events" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Events</a>
+          <a href="#blogs" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Blogs</a>
+          <a href="#gallery" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Gallery</a>
+          <a href="#contact" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Contact Us</a>
+        </nav>
+
+        <!-- Auth Actions / CTA Button -->
+        <div class="hidden md:flex items-center space-x-4">
+          <div id="nav-auth-container" class="flex items-center space-x-3">
+            <!-- Dynamic auth content will inject here -->
+            <a href="#auth" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-indigo to-brand-violet hover:opacity-90 text-white font-medium text-sm transition-all shadow-md shadow-brand-indigo/10 flex items-center gap-2">
+              <i data-lucide="user" class="w-4 h-4"></i> Sign In
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden">
+          <button id="mobile-menu-toggle" class="p-2 rounded-lg text-slate-400 hover:text-white focus:outline-none">
+            <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+            <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-navigation-drawer" class="md:hidden hidden border-b border-brand-indigo/10 bg-brand-deep/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-3">
+      <a href="#home" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Home</a>
+      <a href="#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">About Us</a>
+      <a href="#services" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Services</a>
+      <a href="#events" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Events</a>
+      <a href="#blogs" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Blogs</a>
+      <a href="#gallery" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Gallery</a>
+      <a href="#contact" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Contact Us</a>
+      <hr class="border-brand-indigo/10 my-2">
+      <div id="mobile-nav-auth-container" class="px-3">
+        <!-- Dynamic auth content for mobile will inject here -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Router Viewport Wrapper -->
+  <main id="app-viewport" class="flex-grow min-h-screen pt-16 sm:pt-20">
+    <!-- Templates render dynamically here -->
+    <div class="flex items-center justify-center min-h-[60vh]">
+      <div class="flex flex-col items-center space-y-4">
+        <div class="w-12 h-12 rounded-full border-4 border-brand-indigo border-t-transparent animate-spin"></div>
+        <p class="text-slate-400 font-medium animate-pulse">Initializing Portal Ecosystem...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Service Detail Drawer Overlay -->
+  <div id="drawer-backdrop" class="drawer-backdrop"></div>
+  <div id="service-detail-drawer" class="detail-drawer flex flex-col">
+    <!-- Header -->
+    <div class="p-6 border-b border-brand-indigo/10 flex items-center justify-between bg-brand-deep">
+      <h3 id="drawer-title" class="text-xl font-bold text-white">Service Specifications</h3>
+      <button id="drawer-close" class="p-2 rounded-lg hover:bg-brand-dark text-slate-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+    <!-- Content Scroll -->
+    <div id="drawer-content" class="flex-1 overflow-y-auto p-6 space-y-6">
+      <!-- Service dynamic details inject here -->
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="bg-brand-darker border-t border-brand-indigo/10 py-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <!-- Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-indigo to-brand-cyan flex items-center justify-center">
+              <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+            </div>
+            <span class="text-lg font-bold text-white">AI-Solutions</span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed" id="footer-mission-text">
+            Sunderland-based startup empowering workforce teams through custom AI integrations and rapid digital prototype validation.
+          </p>
+          <div class="text-xs text-slate-500">
+            © 2026 AI-Solutions Ltd. All rights reserved.
+          </div>
+        </div>
+
+        <!-- Links Hub -->
+        <div>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">Ecosystem</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#services" class="text-slate-400 hover:text-white transition-colors">Digital Solutions</a></li>
+            <li><a href="#events" class="text-slate-400 hover:text-white transition-colors">Workplace Events</a></li>
+            <li><a href="#gallery" class="text-slate-400 hover:text-white transition-colors">Design Gallery</a></li>
+            <li><a href="#blogs" class="text-slate-400 hover:text-white transition-colors">Tech Insights</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact details -->
+        <div>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">Sunderland HQ</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-brand-indigo shrink-0 mt-0.5"></i>
+              <span id="footer-address">Sunderland Software Centre, Sunderland, UK</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-brand-indigo shrink-0"></i>
+              <span id="footer-phone">+44 191 000 0000</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-brand-indigo shrink-0"></i>
+              <span id="footer-email">hello@ai-solutions.co.uk</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Status / Location map placeholder badge -->
+        <div>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">Startup Status</h4>
+          <div class="p-4 rounded-xl glass-panel border border-brand-indigo/10 space-y-3">
+            <div class="flex items-center gap-2 text-xs">
+              <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="text-slate-300 font-medium">AI Agent Node Active</span>
+            </div>
+            <p class="text-xs text-slate-400">
+              Prototyping engine connected. Ask the assistant to generate blueprint cost calculations.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Toast Notification UI -->
+  <div id="toast-container" class="fixed bottom-6 left-6 z-50 flex flex-col gap-3 pointer-events-none max-w-sm"></div>
+
+  <!-- Global Floating AI Assistant Widget -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- Chat Drawer Panel -->
+    <div id="chat-drawer" class="chat-drawer hidden flex flex-col rounded-2xl glass-panel bg-brand-darker/95 mb-4 overflow-hidden">
+      <!-- Header -->
+      <div class="p-4 bg-gradient-to-r from-brand-indigo to-brand-violet flex items-center justify-between text-white shadow-md">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center animate-pulse">
+            <i data-lucide="bot" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold leading-tight">AI Virtual Assistant</h4>
+            <p class="text-[10px] text-indigo-100 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> Always Online
+            </p>
+          </div>
+        </div>
+        <button id="chat-close" class="p-1 rounded-lg hover:bg-white/10 text-white transition-colors">
+          <i data-lucide="minus" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Messages Body -->
+      <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 text-sm bg-brand-deep/30">
+        <!-- Initial Message -->
+        <div class="flex items-start gap-2">
+          <div class="w-8 h-8 rounded-lg bg-brand-indigo/10 flex items-center justify-center text-brand-indigo shrink-0">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="chat-bubble bg-brand-dark rounded-r-xl rounded-bl-xl p-3 border border-brand-indigo/5 text-slate-300">
+            Hi! I am the AI-Solutions Virtual Assistant. 🤖 How can I assist you with digital employee experience systems or workspace strategy today?
+            <div class="mt-2 text-[10px] text-slate-400">AI-Solutions Bot</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Prompt Chips -->
+      <div class="px-4 py-2 bg-brand-darker border-t border-brand-indigo/5 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none" id="chat-chips-container">
+        <button class="chat-chip px-3 py-1.5 rounded-full bg-brand-dark border border-brand-indigo/10 hover:border-brand-indigo/30 hover:bg-brand-indigo/5 text-xs text-brand-indigo transition-all flex items-center gap-1 shrink-0" data-prompt="Estimate Project Cost">
+          <i data-lucide="calculator" class="w-3 h-3"></i> Estimate Project Cost
+        </button>
+        <button class="chat-chip px-3 py-1.5 rounded-full bg-brand-dark border border-brand-indigo/10 hover:border-brand-indigo/30 hover:bg-brand-indigo/5 text-xs text-brand-indigo transition-all flex items-center gap-1 shrink-0" data-prompt="Sunderland Location">
+          <i data-lucide="map-pin" class="w-3 h-3"></i> Sunderland Location
+        </button>
+        <button class="chat-chip px-3 py-1.5 rounded-full bg-brand-dark border border-brand-indigo/10 hover:border-brand-indigo/30 hover:bg-brand-indigo/5 text-xs text-brand-indigo transition-all flex items-center gap-1 shrink-0" data-prompt="Explore Services">
+          <i data-lucide="compass" class="w-3 h-3"></i> Explore Services
+        </button>
+      </div>
+
+      <!-- Footer Input Form -->
+      <form id="chat-input-form" class="p-3 bg-brand-darker border-t border-brand-indigo/10 flex items-center gap-2">
+        <input type="text" id="chat-input-field" placeholder="Type a message or build request..." class="flex-1 bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-indigo transition-colors" required>
+        <button type="submit" class="w-9 h-9 rounded-xl bg-brand-indigo hover:bg-brand-indigo-hover text-white flex items-center justify-center transition-colors shadow-md shadow-brand-indigo/10">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Floating Action Button Toggle -->
+    <button id="chat-toggle" class="pulse-glow w-14 h-14 rounded-full bg-gradient-to-tr from-brand-indigo via-brand-violet to-brand-cyan text-white flex items-center justify-center shadow-lg shadow-brand-indigo/30 hover:scale-105 active:scale-95 transition-all">
+      <i data-lucide="bot" id="chat-icon-bot" class="w-6 h-6"></i>
+      <i data-lucide="x" id="chat-icon-close" class="w-6 h-6 hidden"></i>
+    </button>
+
+  </div>
+
+  <!-- Lucide Icons initialization script -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Main Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
