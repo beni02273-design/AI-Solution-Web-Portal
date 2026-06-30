@@ -25,6 +25,9 @@ app.use('/api/gallery', require('./src/routes/galleryRoutes'));
 app.use('/api/inquiries', require('./src/routes/inquiryRoutes'));
 app.use('/api/settings', require('./src/routes/settingsRoutes'));
 app.use('/api/notifications', require('./src/routes/notificationRoutes'));
+app.use('/api/team', require('./src/routes/teamRoutes'));
+app.use('/api/testimonials', require('./src/routes/testimonialRoutes'));
+app.use('/api/partners', require('./src/routes/partnerRoutes'));
 
 // Serve Static Assets in production/development
 app.use(express.static(path.join(__dirname, '../frontend')));

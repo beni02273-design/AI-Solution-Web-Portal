@@ -1,173 +1,110 @@
-### Implementation Plan:
-AI-Solutions Web Portal Implementation Plan
-AI-Solutions is a Sunderland-based startup specializing in software solutions that enhance the digital employee experience, featuring a floating AI virtual assistant that handles customer inquiries and generates prototyping solutions. This plan outlines the technical design, database schemas, API routes, frontend architecture, and verification steps.
+# AI-Solutions Web Portal — User & Administrator Guide
 
-User Review Required
-IMPORTANT
+Welcome to the **AI-Solutions Web Portal**. This is a completely dynamic, responsive Single Page Application (SPA) with a Node.js/Express backend and MongoDB. It features a ChatGPT-style AI assistant widget, light/dark mode theme support, testimonial carousel, and a full-featured admin content dashboard.
 
-The default credentials for testing the portal will be:
+---
 
-Admin: admin@ai-solutions.co.uk (Password: AdminPass123!)
-User: user@ai-solutions.co.uk (Password: UserPass123!)
-TIP
+## 🚀 Getting Started (How to Run the System)
 
-To provide a seamless experience where the floating AI Virtual Assistant remains active and retains chat history across pages, the frontend will be built as a Single Page Application (SPA) using a vanilla JavaScript hash router (#home, #services, #dashboard, etc.). This avoids page reload flashes and yields a highly polished user experience.
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v16+)
+- [MongoDB](https://www.mongodb.com/) (Local installation or MongoDB Atlas cluster connection)
 
-Proposed Changes
-Database & Backend Model Schemas
-We will use MongoDB (via Mongoose) to manage the data.
+### 1. Installation
+Clone or navigate to the workspace, then install the dependencies for both frontend and backend:
 
-User.js
-Stores information about registered users and administrators.
+```bash
+# Install backend dependencies
+cd backend
+npm install
+```
 
-name (String, required)
-email (String, required, unique)
-password (String, required, hashed)
-role (String: 'user' or 'admin', default: 'user')
-createdAt (Date, default: Date.now)
-Service.js
-Stores service offerings.
+### 2. Environment Configuration
+Create a `.env` file in the `backend/` directory with the following variables:
 
-title (String, required)
-description (String, required)
-icon (String, required) - Lucide icon class name
-image (String, required) - Image URL (supports uploaded/placeholder images)
-details (String) - Expanded information/markdown
-price (Number) - Pricing estimate
-deliveryTime (String) - Estimated turnaround time
-Blog.js
-Stores blog posts.
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_uri
+JWT_SECRET=your_jwt_signature_secret_key
+NODE_ENV=development
+```
 
-title (String, required)
-content (String, required)
-image (String, required)
-category (String, required)
-author (String, required)
-createdAt (Date, default: Date.now)
-Event.js
-Stores upcoming events.
+*(Note: A pre-configured remote database cluster URI is supplied in the workspace `.env` by default).*
 
-title (String, required)
-description (String, required)
-image (String, required)
-date (Date, required)
-time (String, required)
-location (String, required)
-attendees (Array of Refs to User)
-Gallery.js
-Stores gallery images.
+### 3. Database Seeding
+To populate the database with default services, team members, blog posts, testimonials, and administrative accounts, run the seed command inside the `backend` folder:
 
-title (String)
-description (String)
-imageUrl (String, required)
-category (String)
-createdAt (Date, default: Date.now)
-Inquiry.js
-Stores contact inquiries and AI-Assistant prototype requests.
+```bash
+npm run seed
+```
 
-user (Ref to User, optional for guest/anonymous inquiries)
-name (String, required)
-email (String, required)
-phone (String)
-subject (String)
-message (String, required)
-status (String: 'Pending', 'In Progress', 'Resolved', default: 'Pending')
-prototypeDetails (Object) - AI assistant-generated blueprint/tech-stack/pricing if applicable
-replies (Array of { sender: String, text: String, createdAt: Date })
-createdAt (Date, default: Date.now)
-SiteSettings.js
-Stores site-wide variables customizable by the admin.
+This clears existing entries and creates:
+- **Admin Account**: `admin@ai-solutions.co.uk` (Password: `AdminPass123!`)
+- **Standard User**: `user@ai-solutions.co.uk` (Password: `UserPass123!`)
+- Initial portfolio of 6 Services, 3 Events, 3 Blogs, 6 Gallery items, 10 Partners, and 2 Testimonials.
 
-companyName (String)
-mission (String)
-officeAddress (String)
-officePhone (String)
-officeEmail (String)
-heroTitle (String)
-heroSubtitle (String)
-Notification.js
-System notifications for users/admins.
+### 4. Running the Development Server
+Run the dev task inside the `backend` folder:
 
-user (Ref to User, required)
-title (String, required)
-message (String, required)
-read (Boolean, default: false)
-createdAt (Date, default: Date.now)
-Backend API Routes (backend/src/routes/)
-We will implement the following REST endpoints:
+```bash
+npm run dev
+```
+The application will launch on **http://localhost:5000**.
 
-/api/auth
+---
 
-POST /register: Registers a new user account.
-POST /login: Log in to user/admin accounts (returns a JWT token and user info).
-POST /change-password (Authenticated): Updates password.
-GET /me (Authenticated): Returns current user details.
-/api/services
+## 👤 Normal User Guide
 
-GET /: Lists all services.
-POST /, PUT /:id, DELETE /:id (Admin only): CRUD operations.
-/api/blogs
+### 1. Account Registration
+1. Click **Sign In** in the top navigation bar.
+2. Under the auth form card, select the **Sign Up** tab.
+3. Fill in your **Name**, **Email Address**, and a **Secure Password**, and submit.
+4. You will be logged in automatically and redirected to the Home page.
 
-GET /: Lists all blogs.
-POST /, PUT /:id, DELETE /:id (Admin only): CRUD operations.
-/api/events
+### 2. Signing In & Using Dashboard
+1. Click **Sign In**, fill in your registered email and password.
+2. Once authenticated, the header button switches to **Dashboard**. Click it to view:
+   - **Profile Settings**: View account information and system inbox notifications.
+   - **My Inquiries**: Track custom quotes, feedback, and AI-generated prototype blueprints you've saved.
+   - **Registered Events**: View upcoming workshops in Sunderland you've signed up for.
+   - **Change Password**: Safely update your security credentials.
 
-GET /: Lists all events.
-POST /:id/register (Authenticated): Register user for an event.
-POST /, PUT /:id, DELETE /:id (Admin only): CRUD operations.
-/api/gallery
+### 3. Creating Prototyping Blueprints (AI Chatbot)
+1. Open the floating **AI Assistant** bubble in the bottom right.
+2. Ask questions naturally in plain English (e.g., *"How much to build an e-commerce shop app?"* or *"Give me a blueprint for a saas dashboard"*).
+3. The chatbot will reply in conversational, ChatGPT-like language and generate an interactive **Prototype Blueprint** card.
+4. Click **Save Prototype to Inquiries** on the card to log it in your dashboard profile.
 
-GET /: Lists gallery images.
-POST /, DELETE /:id (Admin only): CRUD operations.
-/api/inquiries
+---
 
-GET / (Admin only): Lists all inquiries.
-GET /my (Authenticated): Lists inquiries for the logged-in user.
-POST /: Submits a contact inquiry.
-POST /chat-assistant: Chatbot endpoint that interacts with visitors, answers FAQs, and generates tailored prototyping blueprints (tech stack, wireframe layout, estimate).
-POST /:id/reply (Admin only): Replies to an inquiry and generates notifications.
-/api/settings
+## 🔑 Administrator Guide
 
-GET /: Returns site settings and contact info.
-PUT / (Admin only): Updates site settings.
-GET /analytics (Admin only): Compiles stats (user count, inquiry categories, event attendance).
-Frontend Design & UI System (frontend/)
-[MODIFY] 
-index.html
-The page shell containing:
+### 1. Administrative Login
+1. Click **Sign In** in the navigation header.
+2. Use the seeded credentials:
+   - **Email**: `admin@ai-solutions.co.uk`
+   - **Password**: `AdminPass123!`
+3. Once authenticated, the navigation button changes to **Admin Panel**. Click it to access system tools.
 
-Dynamic Navigation Header: Logo + Spark Icon, responsive links, and an Auth/Dashboard button that alters depending on user session.
-Main Router Wrapper (<main id="app-viewport"></main>): Vanilla routing logic binds views to render sections dynamically:
-Home: Hero section with explore buttons, stats section, client grid, testimonial, and secondary CTA.
-About: Intro section and detailed mission statements.
-Services: High-quality cards with icons, price estimate badges, benefits list, and detail drawers.
-Events: Calendar/cards list with interactive "Register" buttons.
-Blogs: Categorized card grids with hover zoom effects.
-Gallery: Visual showcase with categories.
-Contact Us: Side-by-side details panel and messaging form.
-Auth (Sign In & Sign Up): Clean dual-tabbed input card.
-Admin/User Dashboards: High-performance sidebar layout offering tabs for profile, notifications, system management, analytics graphics, and settings.
-Global Floating AI Assistant Panel: Floating action button expanding to a full chat overlay. It features automated typing state, pre-filled chips (e.g., "Estimate Project Cost", "Sunderland Location", "Explore AI Assistant"), and custom interactive blueprints.
-[MODIFY] 
-style.css
-Will implement a premium UI mirroring https://kindred-ai-vision.lovable.app/:
+> [!NOTE]
+> Since standard register requests (`/api/auth/register`) default to the `user` security level, new administrative accounts must be created either by updating the Mongoose `role` field to `'admin'` directly in your database collection or by editing the seed script.
 
-Color Variables: Indigo brand colors (#6366F1), dark deep-blue slate backgrounds (#0B132B / #0F172A), card colors (#FFFFFF / #F8FAFC).
-Typography: Custom imported Google Font (Outfit or Inter) with clean sizes and weights.
-Animations: Floating chatbot widget transitions, hover translation transforms (hover:-translate-y-2), soft glow shadow states.
-Glassmorphism: Navigation bar and panels with backdrop-blur overlays.
-[MODIFY] 
-script.js
-Contains routing rules, API calls (using fetch), chatbot state management, inquiry submission, authentication workflows, registration triggers, and dashboard updates.
+### 2. Updating Website Content
+Under the **Admin Panel**, administrators can manage every page dynamically without editing code:
 
-Verification Plan
-Automated Setup & Tests
-Initialization Command: Run npm install inside the backend folder to ensure all dependencies (express, mongoose, cors, dotenv, bcryptjs, jsonwebtoken) are clean.
-Seed Script: Implement a seed script npm run seed in the backend to pre-populate default services, events, blogs, settings, user, and admin profiles in MongoDB.
-Local Dev Execution: Start the server with npm run dev (via nodemon) and run a health verify request.
-Manual Verification
-Open the local port in the web browser.
-Verify visual appearance: verify responsive cards, dark-indigo gradients, and grid spacing.
-Open the floating AI Virtual Assistant, type a request (e.g., "Build me an e-commerce website"), and verify that it returns a prototype blueprint with tech stack, modules, and estimated pricing.
-Sign in as Admin (admin@ai-solutions.co.uk / AdminPass123!), view the admin dashboard, create a new service and blog, verify they show up instantly in their respective pages.
-Create a new user profile, register for an event, verify the user dashboard registration shows up, submit a contact inquiry, and view notifications.
+- **Site Settings**: Customize the company name, support phone line, email inbox, office address, mission statement, homepage hero copy, hero side image, and section details.
+- **Manage Services**: View, edit, add, or delete digital offerings. You can change titles, pricing, delivery speed, and detailed descriptions.
+- **Manage Blogs**: Create new tech insights and articles with custom image links and categories.
+- **Manage Events**: Publish new Sunderland workshops, edit dates/locations, or delete events.
+- **Manage Gallery**: Keep the workspace design showcase updated by adding fresh project mockups.
+- **Manage Team**: Add or remove members of the leadership team.
+- **Manage Testimonials**: Create and edit client testimonials (these are instantly rendered on the Home page carousel).
+- **Manage Partners**: Update logos for regional tech partners.
+- **Manage Inquiries**: Review and reply to client requests. An automatic notification is sent to the client when you reply.
+
+---
+
+## 🎨 Theme & Responsiveness Features
+
+- **Light/Dark Mode**: Click the **Moon / Sun** icon in the header navigation (or mobile menu) to toggle the theme instantly. The site uses CSS variables (`var(--bg-deep)`) to swap styles smoothly without flashing.
+- **Responsiveness**: Flex-grids, relative sizing, collapsible navigation drawers, and snap-scrolling testimonials ensure the portal works perfectly on smartphones, tablets, laptops, and ultra-wide screens.

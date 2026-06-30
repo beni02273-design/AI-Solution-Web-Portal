@@ -128,17 +128,16 @@ const chatAssistant = async (req, res) => {
       officeEmail: 'hello@ai-solutions.co.uk'
     };
 
-    // Chatbot intelligence / rule-based matches
     if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
-      replyText = `Hello! I am the AI-Solutions virtual assistant. 🤖 I can help you learn about our digital employee experience solutions, outline our custom software services, or generate a **free project prototype blueprint** for your startup. What project are you planning today?`;
+      replyText = `Hello! I am the AI-Solutions Virtual Assistant. 🤖 It is great to connect with you today! I can help you explore our services, give you details about our Sunderland headquarters, or even generate a customized project prototype blueprint for your startup idea.\n\nWhat kind of project are you thinking of building? Tell me a bit about it and we can design a blueprint together!`;
     } else if (query.includes('office') || query.includes('address') || query.includes('location') || query.includes('sunderland')) {
-      replyText = `We are proudly based in Sunderland, UK! 🇬🇧\nOur primary headquarters is located at:\n**${settings.officeAddress}**\n\nYou can also reach us via phone at **${settings.officePhone}** or email at **${settings.officeEmail}**.`;
+      replyText = `We are proudly based in Sunderland, UK! 🇬🇧\n\nOur headquarters is located at:\n**${settings.officeAddress}**\n\nIt is a modern, high-tech engineering hub located right next to Mowbray Park, just a 3-minute walk from Sunderland Central train station. If you'd like to get in touch, you can reach us on **${settings.officePhone}** or email us at **${settings.officeEmail}**. Feel free to stop by if you're in the area!`;
     } else if (query.includes('mission') || query.includes('aim') || query.includes('goal')) {
-      replyText = `Our core mission is:\n*"${settings.mission}"*\nWe focus heavily on improving support systems, automation, and productivity for workforce teams.`;
+      replyText = `At AI-Solutions, our core mission is:\n\n*"${settings.mission}"*\n\nWe focus on utilizing AI and modern software design to support employee teams, automate complex tasks, and make digital workflows a positive experience. Let me know if you would like to see how our services align with this goal!`;
     } else if (query.includes('services') || query.includes('what do you do') || query.includes('help')) {
       const services = await Service.find().limit(4);
       const serviceList = services.map(s => `• **${s.title}**: ${s.description}`).join('\n');
-      replyText = `At AI-Solutions, we provide a wide range of state-of-the-art services to assist various industries:\n\n${serviceList || '• AI Virtual Assistant\n• Rapid AI Prototyping\n• Custom Software Development\n• Digital Employee Experience consultancy'}\n\nAsk me to **"generate a prototype for my e-commerce"** or similar to see an example plan.`;
+      replyText = `We offer a wide range of expert services tailored for business transformation:\n\n${serviceList || '• AI Virtual Assistant\n• Rapid AI Prototyping\n• Custom Software Development\n• Digital Employee Experience consultancy'}\n\nIf you have a specific project idea in mind, just ask me to **"generate a prototype for my e-commerce"** or describe your concept, and I'll create a step-by-step blueprint with cost estimations for you!`;
     } else if (
       query.includes('prototype') ||
       query.includes('build') ||
@@ -148,7 +147,6 @@ const chatAssistant = async (req, res) => {
       query.includes('estimate') ||
       query.includes('project')
     ) {
-      // Determine what type of project they are building
       let projectType = 'Custom Platform';
       let stack = 'MongoDB, Express.js, React, Node.js (MERN stack)';
       let features = ['Secure Auth', 'Responsive Dashboard', 'AI Integration Module', 'Database Logging'];
@@ -186,7 +184,7 @@ const chatAssistant = async (req, res) => {
         timeframe = '4-5 weeks';
       }
 
-      replyText = `Fantastic! Based on your query, I have compiled a **Rapid Prototyping Blueprint** for your **${projectType}**.\n\nSee the structured outline details in the generated panel below. You can save this prototype blueprint directly to your profile inquiries to get started on development with our engineering team!`;
+      replyText = `That sounds like a brilliant project! To help you plan, I have compiled a **Rapid Prototyping Blueprint** for your **${projectType}**.\n\nYou can review the recommended technical details in the card below. If you're signed in, you can click **"Save Prototype to Inquiries"** to add this plan straight to your dashboard profile. Our engineering team in Sunderland will review it and get back to you!`;
 
       prototypeDetails = {
         projectName: projectType,
@@ -197,7 +195,7 @@ const chatAssistant = async (req, res) => {
         timeframe: timeframe,
       };
     } else {
-      replyText = `I hear you! To provide the best assistance, could you tell me more about your requirements? \n\nFor example, if you want a price estimate, try typing **"how much to build a SaaS dashboard app?"** or **"need an e-commerce website prototype"**.`;
+      replyText = `I would love to help you with that! To give you the most accurate response, could you describe what you're hoping to build or what details you need?\n\nFor example, if you are looking for a price estimate, try asking **"how much to build a SaaS dashboard app?"** or **"need an e-commerce website prototype"**, and I will generate a comprehensive blueprint for you.`;
     }
 
     res.json({

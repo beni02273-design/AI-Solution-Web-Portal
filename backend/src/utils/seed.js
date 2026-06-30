@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
+// dns.setServers removed
 
 // Load models
 const User = require('../models/User');
@@ -11,14 +12,26 @@ const Gallery = require('../models/Gallery');
 const SiteSettings = require('../models/SiteSettings');
 const Inquiry = require('../models/Inquiry');
 const Notification = require('../models/Notification');
+const TeamMember = require('../models/TeamMember');
+const Testimonial = require('../models/Testimonial');
+const Partner = require('../models/Partner');
 
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const seedDB = async () => {
   try {
     const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/ai_solutions';
-    await mongoose.connect(mongoUri);
-    console.log('MongoDB Connected for seeding...');
+    console.log('Connecting to primary database for seeding...');
+    try {
+      await mongoose.connect(mongoUri);
+      console.log('MongoDB Connected for seeding (Primary)...');
+    } catch (primaryErr) {
+      console.error(`Primary database connection failed for seeding: ${primaryErr.message}`);
+      console.log('Attempting local database connection fallback for seeding...');
+      const localUri = 'mongodb://127.0.0.1:27017/ai_solutions';
+      await mongoose.connect(localUri);
+      console.log('MongoDB Connected for seeding (Local Fallback)...');
+    }
 
     // Clear existing data
     await User.deleteMany();
@@ -29,6 +42,9 @@ const seedDB = async () => {
     await SiteSettings.deleteMany();
     await Inquiry.deleteMany();
     await Notification.deleteMany();
+    await TeamMember.deleteMany();
+    await Testimonial.deleteMany();
+    await Partner.deleteMany();
 
     console.log('Cleared existing collections...');
 
@@ -39,8 +55,21 @@ const seedDB = async () => {
       officeAddress: 'Sunderland Software Centre, Tavistock Place, Sunderland, UK',
       officePhone: '+44 191 000 0000',
       officeEmail: 'hello@ai-solutions.co.uk',
-      heroTitle: 'Let\'s build something intelligent',
-      heroSubtitle: 'Tell us about your project — we\'ll respond within one working day.',
+      heroPreheading: 'AI · SUNDERLAND · UK',
+      heroTitle: 'Empowering Ideas with AI Excellence',
+      heroSubtitle: 'AI-Solutions builds intelligent virtual assistants and affordable AI prototypes that accelerate design, engineering and innovation — so your people can do their best work.',
+      heroImage: 'https://kindred-ai-vision.lovable.app/assets/hero-person-D8M9l6CF.jpg',
+      aboutTitle: 'We provide truly prominent AI solutions for your success',
+      aboutText: 'AI-Solutions is the partner of choice for leading enterprises and growing businesses. From our headquarters in Sunderland we deliver AI software, prototypes and consultancy that put people first.',
+      aboutImage: 'https://kindred-ai-vision.lovable.app/assets/why-choose-C6MgmLi8.jpg',
+      aboutGlobalReach: 'Trusted by teams across the UK, EU and beyond.',
+      aboutAwardWinning: 'Recognised for AI innovation in employee experience.',
+      aboutClientsPct: '98%',
+      aboutProjectsCount: '590+',
+      whyChooseUsTitle: 'Trusted by teams that ship at scale',
+      whyChooseUsText: 'From Sunderland to Singapore, leading brands choose AI-Solutions as their AI partner.',
+      bottomCtaTitle: 'Ready to bring AI into your business?',
+      bottomCtaText: 'Talk to our team in Sunderland about an AI virtual assistant, a rapid prototype or a full custom build.',
     });
     console.log('Site settings created.');
 
@@ -72,21 +101,12 @@ const seedDB = async () => {
         deliveryTime: '3-5 days',
       },
       {
-        title: 'Rapid AI Prototyping',
-        description: 'Validate ideas in days with affordable AI-powered prototypes ready to test with real users.',
-        icon: 'edit-3',
-        image: 'https://images.unsplash.com/photo-1581291518655-9523c932dedf?auto=format&fit=crop&w=600&q=80',
-        details: 'Skip months of specification and coding. We create functional interactive prototypes using generative frameworks in a fraction of the time and cost.',
-        price: 1200,
-        deliveryTime: '1-2 weeks',
-      },
-      {
         title: 'Custom Software Development',
         description: 'End-to-end engineering of business applications integrated with your existing tech stack.',
         icon: 'code',
         image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80',
         details: 'From requirements mapping through deployment, we build robust backend architectures and clean modern frontends tailored to your operations.',
-        price: 4500,
+        price: 4505,
         deliveryTime: '4-6 weeks',
       },
       {
@@ -106,6 +126,15 @@ const seedDB = async () => {
         details: 'Our enterprise architects run technical assessments to identify bottlenecks, automate workflows, and plan migration strategies.',
         price: 1500,
         deliveryTime: 'On demand',
+      },
+      {
+        title: 'Rapid AI Prototyping',
+        description: 'Validate ideas in days with affordable AI-powered prototypes ready to test with real users.',
+        icon: 'edit-3',
+        image: 'https://images.unsplash.com/photo-1581291518655-9523c932dedf?auto=format&fit=crop&w=600&q=80',
+        details: 'Skip months of specification and coding. We create functional interactive prototypes using generative frameworks in a fraction of the time and cost.',
+        price: 1200,
+        deliveryTime: '1-2 weeks',
       },
       {
         title: 'Digital Employee Experience',
@@ -272,6 +301,65 @@ const seedDB = async () => {
       }
     ]);
     console.log('Notifications seeded.');
+
+    // Create Default Team Members
+    await TeamMember.create([
+      {
+        name: 'Sarah Mitchell',
+        role: 'Project Manager',
+        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=700&fit=crop'
+      },
+      {
+        name: 'Daniel Okafor',
+        role: 'Operations Manager',
+        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=700&fit=crop'
+      },
+      {
+        name: 'James Patel',
+        role: 'Business Head',
+        image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=600&h=700&fit=crop'
+      },
+      {
+        name: 'Liam Chen',
+        role: 'IT Manager',
+        image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=700&fit=crop'
+      }
+    ]);
+    console.log('Team members seeded.');
+
+    // Create Default Testimonials
+    await Testimonial.create([
+      {
+        quote: 'AI-Solutions transformed how our staff interact with our internal systems. The virtual assistant alone saved us hundreds of hours a month.',
+        author: 'William Jackson',
+        role: 'Product Manager',
+        stars: 5,
+        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&q=80'
+      },
+      {
+        quote: 'Their rapid prototyping process turned a vague idea into a working AI tool we could show to investors in just two weeks.',
+        author: 'Emma Williams',
+        role: 'CTO, Northcoast',
+        stars: 5,
+        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&q=80'
+      }
+    ]);
+    console.log('Testimonials seeded.');
+
+    // Create Default Partners
+    await Partner.create([
+      { name: 'Boosterio' },
+      { name: 'SEO Mind' },
+      { name: 'Prelude' },
+      { name: 'Logoipsum' },
+      { name: 'JPSN' },
+      { name: 'CircleTech' },
+      { name: 'Northcoast' },
+      { name: 'Stackly' },
+      { name: 'Boxhub' },
+      { name: 'Glowlab' }
+    ]);
+    console.log('Partners seeded.');
 
     console.log('Database Seeding Complete!');
     process.exit(0);
