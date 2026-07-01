@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getEvents, createEvent, updateEvent, deleteEvent, registerForEvent } = require('../controllers/eventController');
+const { getEvents, createEvent, updateEvent, deleteEvent, registerForEvent, unregisterFromEvent } = require('../controllers/eventController');
 const { protect, adminOnly } = require('../middleware/auth');
 
 router.route('/')
@@ -12,5 +12,6 @@ router.route('/:id')
   .delete(protect, adminOnly, deleteEvent);
 
 router.post('/:id/register', protect, registerForEvent);
+router.post('/:id/unregister', protect, unregisterFromEvent);
 
 module.exports = router;

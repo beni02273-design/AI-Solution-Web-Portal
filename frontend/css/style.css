@@ -83,11 +83,53 @@ body {
 }
 
 .glass-navbar {
-  background: rgba(255, 255, 255, 0.95);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.glass-navbar #mobile-menu-toggle {
+  color: #475569;
+}
+
+/* Dark mode adaptions when dashboard view is active */
+body.bg-brand-deep .glass-navbar {
+  background: var(--bg-deep) !important;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.15) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.bg-brand-deep .glass-navbar span.text-slate-900 {
+  color: #ffffff !important;
+}
+
+body.bg-brand-deep .glass-navbar nav a:not(.text-brand-indigo) {
+  color: rgba(248, 250, 252, 0.8) !important;
+}
+
+body.bg-brand-deep .glass-navbar nav a:not(.text-brand-indigo):hover {
+  color: var(--primary) !important;
+}
+
+body.bg-brand-deep .glass-navbar #nav-auth-container a:first-child {
+  color: rgba(248, 250, 252, 0.8) !important;
+}
+
+body.bg-brand-deep .glass-navbar #nav-auth-container a:first-child:hover {
+  color: var(--primary) !important;
+}
+
+body.bg-brand-deep .glass-navbar #mobile-menu-toggle {
+  color: #cbd5e1;
 }
 
 /* Gradients and Glows */

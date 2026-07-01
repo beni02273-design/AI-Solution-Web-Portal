@@ -51,8 +51,8 @@ const seedDB = async () => {
     // Create Site Settings
     const settings = await SiteSettings.create({
       companyName: 'AI-Solutions',
-      mission: 'To innovate, promote, and deliver the future of the digital employee experience, with a strong focus on supporting people at work.',
-      officeAddress: 'Sunderland Software Centre, Tavistock Place, Sunderland, UK',
+      mission: 'Innovating, promoting, and delivering the future of the digital employee experience from Sunderland to the world.',
+      officeAddress: 'Sunderland, United Kingdom',
       officePhone: '+44 191 000 0000',
       officeEmail: 'hello@ai-solutions.co.uk',
       heroPreheading: 'AI · SUNDERLAND · UK',
@@ -70,6 +70,7 @@ const seedDB = async () => {
       whyChooseUsText: 'From Sunderland to Singapore, leading brands choose AI-Solutions as their AI partner.',
       bottomCtaTitle: 'Ready to bring AI into your business?',
       bottomCtaText: 'Talk to our team in Sunderland about an AI virtual assistant, a rapid prototype or a full custom build.',
+      googleClientId: '1008059048244-ij0rj8pqla7374ca5v7g19vt9g7742SG.apps.googleusercontent.com',
     });
     console.log('Site settings created.');
 

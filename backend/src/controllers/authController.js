@@ -117,9 +117,93 @@ const changePassword = async (req, res) => {
   }
 };
 
+// Helper function to verify Google Access Token natively via userinfo endpoint
+const https = require('https');
+const verifyGoogleAccessToken = (accessToken) => {
+  return new Promise((resolve, reject) => {
+    https.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`, (response) => {
+      let data = '';
+      response.on('data', (chunk) => {
+        data += chunk;
+      });
+      response.on('end', () => {
+        if (response.statusCode === 200) {
+          resolve(JSON.parse(data));
+        } else {
+          try {
+            const parsed = JSON.parse(data);
+            reject(new Error(parsed.error_description || 'Invalid Google access token'));
+          } catch (e) {
+            reject(new Error('Invalid token response from Google userinfo API'));
+          }
+        }
+      });
+    }).on('error', (err) => {
+      reject(err);
+    });
+  });
+};
+
+// @desc    Authenticate or Register user using Google Access Token
+// @route   POST /api/auth/google
+// @access  Public
+const googleAuth = async (req, res) => {
+  const { accessToken } = req.body;
+
+  if (!accessToken) {
+    return res.status(400).json({ success: false, message: 'Google Access Token is required' });
+  }
+
+  try {
+    const payload = await verifyGoogleAccessToken(accessToken);
+    const { email, name } = payload;
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: 'Google token does not contain email' });
+    }
+
+    // Check if user exists
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // User doesn't exist, create a new profile with Google details
+      const crypto = require('crypto');
+      const randomPassword = crypto.randomBytes(16).toString('hex') + 'G1!';
+
+      user = await User.create({
+        name: name || email.split('@')[0],
+        email,
+        password: randomPassword,
+      });
+
+      // Log a welcome notification
+      const Notification = require('../models/Notification');
+      await Notification.create({
+        userId: user._id,
+        title: 'Welcome to AI-Solutions!',
+        message: 'Thank you for registering with Google. Open the AI Assistant chatbot in the bottom right to start drafting your project blueprints.',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      token: generateToken(user._id),
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getMe,
   changePassword,
+  googleAuth,
 };

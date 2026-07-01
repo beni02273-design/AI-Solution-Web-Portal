@@ -1,10 +1,11 @@
 // Default Static Fallbacks for Instant Offline-First Rendering
 const defaultSettings = {
   companyName: 'AI-Solutions',
-  mission: 'To innovate, promote, and deliver the future of the digital employee experience, with a strong focus on supporting people at work.',
-  officeAddress: 'Sunderland Software Centre, Tavistock Place, Sunderland, UK',
+  mission: 'Innovating, promoting, and delivering the future of the digital employee experience from Sunderland to the world.',
+  officeAddress: 'Sunderland, United Kingdom',
   officePhone: '+44 191 000 0000',
   officeEmail: 'hello@ai-solutions.co.uk',
+  googleClientId: '1008059048244-ij0rj8pqla7374ca5v7g19vt9g7742SG.apps.googleusercontent.com',
   heroPreheading: 'AI · SUNDERLAND · UK',
   heroTitle: 'Empowering Ideas with AI Excellence',
   heroSubtitle: 'AI-Solutions builds intelligent virtual assistants and affordable AI prototypes that accelerate design, engineering and innovation — so your people can do their best work.',
@@ -164,7 +165,7 @@ const state = {
   notifications: [],
   inquiries: [],
   chatHistory: [
-    { sender: 'assistant', text: 'Hi! I am the AI-Solutions Virtual Assistant. 🤖 How can I assist you with digital employee experience systems or workspace strategy today?', time: new Date() }
+    { sender: 'assistant', text: `👋 Hi, I'm Aida, your AI-Solutions assistant.\n\nI can help you with:\n• 🧠 Our services & pricing\n• 🗺️ Navigating the website\n• 📞 Getting in touch with our team\n\nWhat would you like to explore?`, time: new Date() }
   ],
   activeDashboardTab: 'profile',
   currentEditingItem: null // Used for CRUD modals
@@ -229,6 +230,158 @@ function getHeaders() {
     headers['Authorization'] = `Bearer ${state.token}`;
   }
   return headers;
+}
+
+// Reusable Premium Image Uploader HTML Component
+function createImageUploaderHtml(inputId, label, initialValue = '') {
+  const containerId = `${inputId}-uploader-container`;
+  const textTabId = `${inputId}-tab-text`;
+  const fileTabId = `${inputId}-tab-file`;
+  const textPanelId = `${inputId}-panel-text`;
+  const filePanelId = `${inputId}-panel-file`;
+  const previewId = `${inputId}-preview`;
+  const fileInputId = `${inputId}-file-input`;
+  const spinnerId = `${inputId}-spinner`;
+
+  return `
+    <div id="${containerId}" class="space-y-2 border border-brand-indigo/10 rounded-xl p-3 bg-brand-dark/20 text-xs">
+      <div class="flex items-center justify-between">
+        <label class="text-slate-400 font-bold uppercase text-[10px] tracking-wider">${label}</label>
+        <div class="flex bg-brand-darker/60 p-0.5 rounded-lg border border-brand-indigo/10 text-[10px]">
+          <button type="button" onclick="switchUploaderTab('${inputId}', 'text')" id="${textTabId}" class="px-2.5 py-1 rounded-md text-white bg-brand-indigo font-bold transition-all">URL Link</button>
+          <button type="button" onclick="switchUploaderTab('${inputId}', 'file')" id="${fileTabId}" class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-all">Upload File</button>
+        </div>
+      </div>
+
+      <!-- Text URL Input Panel -->
+      <div id="${textPanelId}" class="space-y-2">
+        <input type="url" id="${inputId}" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-brand-indigo transition-colors" value="${initialValue}" placeholder="https://images.unsplash.com/photo-..." oninput="updateUploaderPreview('${inputId}')">
+      </div>
+
+      <!-- File Upload Input Panel -->
+      <div id="${filePanelId}" class="hidden space-y-2">
+        <div class="relative border-2 border-dashed border-brand-indigo/20 hover:border-brand-indigo/40 rounded-xl p-4 flex flex-col items-center justify-center transition-all bg-brand-darker/35 group cursor-pointer" onclick="document.getElementById('${fileInputId}').click()">
+          <input type="file" id="${fileInputId}" accept="image/*" class="hidden" onchange="uploadFileUploader('${inputId}')">
+          <div id="${spinnerId}" class="hidden absolute inset-0 bg-brand-darker/80 rounded-xl flex items-center justify-center">
+            <div class="w-5 h-5 border-2 border-brand-indigo border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <svg class="w-6 h-6 text-slate-400 group-hover:text-brand-indigo transition-colors mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+          <span class="text-[10px] text-slate-400 group-hover:text-slate-200 transition-colors font-semibold">Drag & drop or click to upload</span>
+          <span class="text-[9px] text-slate-500 mt-0.5">JPG, PNG, GIF up to 5MB</span>
+        </div>
+      </div>
+
+      <!-- Preview Panel -->
+      <div id="${previewId}-wrapper" class="${initialValue ? '' : 'hidden'} flex items-center gap-3 p-2 bg-brand-darker/40 rounded-lg border border-brand-indigo/5">
+        <img id="${previewId}" src="${initialValue}" class="w-12 h-12 object-cover rounded-md border border-brand-indigo/10" alt="Preview" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=60&q=80'">
+        <div class="flex-grow min-w-0">
+          <p class="text-[10px] text-slate-400 truncate" id="${previewId}-url-text">${initialValue}</p>
+          <span class="text-[9px] text-emerald-400 flex items-center gap-1 font-semibold">
+            <svg class="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Ready
+          </span>
+        </div>
+        <button type="button" onclick="clearUploaderImage('${inputId}')" class="p-1 hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 rounded-md transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// Client-side Tab Switcher
+function switchUploaderTab(inputId, tabType) {
+  const textTab = document.getElementById(`${inputId}-tab-text`);
+  const fileTab = document.getElementById(`${inputId}-tab-file`);
+  const textPanel = document.getElementById(`${inputId}-panel-text`);
+  const filePanel = document.getElementById(`${inputId}-panel-file`);
+
+  if (!textTab || !fileTab || !textPanel || !filePanel) return;
+
+  if (tabType === 'text') {
+    textPanel.classList.remove('hidden');
+    filePanel.classList.add('hidden');
+    
+    textTab.className = "px-2.5 py-1 rounded-md text-white bg-brand-indigo font-bold transition-all";
+    fileTab.className = "px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-all";
+  } else {
+    filePanel.classList.remove('hidden');
+    textPanel.classList.add('hidden');
+
+    fileTab.className = "px-2.5 py-1 rounded-md text-white bg-brand-indigo font-bold transition-all";
+    textTab.className = "px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition-all";
+  }
+}
+
+// Updates Thumbnail Preview
+function updateUploaderPreview(inputId) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(`${inputId}-preview`);
+  const previewWrapper = document.getElementById(`${inputId}-preview-wrapper`);
+  const previewUrlText = document.getElementById(`${inputId}-preview-url-text`);
+
+  if (!input || !preview || !previewWrapper || !previewUrlText) return;
+
+  const url = input.value.trim();
+  if (url) {
+    preview.src = url;
+    previewUrlText.textContent = url;
+    previewWrapper.classList.remove('hidden');
+  } else {
+    previewWrapper.classList.add('hidden');
+  }
+}
+
+// Resets Image Selector
+function clearUploaderImage(inputId) {
+  const input = document.getElementById(inputId);
+  const fileInput = document.getElementById(`${inputId}-file-input`);
+  if (input) input.value = '';
+  if (fileInput) fileInput.value = '';
+  updateUploaderPreview(inputId);
+}
+
+// Triggers upload to /api/upload
+async function uploadFileUploader(inputId) {
+  const fileInput = document.getElementById(`${inputId}-file-input`);
+  const spinner = document.getElementById(`${inputId}-spinner`);
+  if (!fileInput || !fileInput.files || fileInput.files.length === 0) return;
+
+  const file = fileInput.files[0];
+  const formData = new FormData();
+  formData.append('image', file);
+
+  if (spinner) spinner.classList.remove('hidden');
+
+  try {
+    const headers = {};
+    if (state.token) {
+      headers['Authorization'] = `Bearer ${state.token}`;
+    }
+
+    const res = await fetch(`${API_URL}/upload`, {
+      method: 'POST',
+      headers,
+      body: formData
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      const input = document.getElementById(inputId);
+      if (input) {
+        input.value = data.url;
+        updateUploaderPreview(inputId);
+        showToast('Upload Success', 'Image has been securely uploaded to Cloudinary.', 'success');
+      }
+    } else {
+      showToast('Upload Failed', data.message || 'Could not process upload.', 'error');
+    }
+  } catch (err) {
+    console.error(err);
+    showToast('Network Error', 'Cannot establish connection to upload server.', 'error');
+  } finally {
+    if (spinner) spinner.classList.add('hidden');
+  }
 }
 
 // Load Authenticated User Profile
@@ -490,7 +643,7 @@ function appendChatBubble(sender, text, prototypeDetails = null) {
     <div class="flex items-start gap-2 ${isAssistant ? '' : 'justify-end'}">
       ${isAssistant ? `
         <div class="w-8 h-8 rounded-lg bg-brand-indigo/10 flex items-center justify-center text-brand-indigo shrink-0">
-          <i data-lucide="bot" class="w-4 h-4"></i>
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
         </div>
       ` : ''}
       <div class="chat-bubble ${isAssistant ? 'bg-brand-dark border border-brand-indigo/5 text-slate-300 rounded-r-xl rounded-bl-xl' : 'bg-brand-indigo text-white rounded-l-xl rounded-br-xl'} p-3 max-w-[80%] flex flex-col gap-2">
@@ -667,11 +820,63 @@ const routes = {
   'dashboard': renderDashboard
 };
 
+// Navigation link active state highlighter
+function updateActiveNavLink(baseHash) {
+  let activeHash = baseHash || 'home';
+  if (activeHash === 'service-details') activeHash = 'services';
+  if (activeHash === 'blog-details') activeHash = 'blogs';
+
+  // Desktop links
+  const desktopLinks = document.querySelectorAll('header nav a');
+  desktopLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === `#${activeHash}`) {
+      link.classList.remove('text-slate-600');
+      link.classList.add('text-brand-indigo');
+    } else {
+      link.classList.remove('text-brand-indigo');
+      link.classList.add('text-slate-600');
+    }
+  });
+
+  // Mobile links
+  const mobileLinks = document.querySelectorAll('#mobile-navigation-drawer a');
+  mobileLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === `#${activeHash}`) {
+      link.classList.remove('text-slate-300');
+      link.classList.add('text-brand-cyan', 'font-bold');
+    } else {
+      link.classList.remove('text-brand-cyan', 'font-bold');
+      link.classList.add('text-slate-300');
+    }
+  });
+}
+
+// Scroll state management for navbar transparency transition
+function updateHeaderScrollState() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  if (window.scrollY > 10) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+}
+
+// Bind scroll listener globally
+window.addEventListener('scroll', updateHeaderScrollState);
+
+
 async function handleRouting() {
   const hash = window.location.hash || '#home';
   const hashParts = hash.split('/');
   const baseHash = hashParts[0].replace('#', '');
   const paramId = hashParts[1] || null;
+
+  // Update navbar styling and scroll state
+  updateActiveNavLink(baseHash);
+  updateHeaderScrollState();
 
   // Collapse mobile navigation menu if open
   const mobileMenu = document.getElementById('mobile-navigation-drawer');
@@ -683,6 +888,15 @@ async function handleRouting() {
 
   // Find routing template
   const renderer = routes[baseHash] || renderHome;
+
+  // Toggle page-level theme classes for dashboard vs public pages
+  if (baseHash === 'dashboard') {
+    document.body.classList.remove('bg-[#F8FAFC]', 'text-slate-800');
+    document.body.classList.add('bg-brand-deep', 'text-white');
+  } else {
+    document.body.classList.remove('bg-brand-deep', 'text-white');
+    document.body.classList.add('bg-[#F8FAFC]', 'text-slate-800');
+  }
   
   // Render view directly using available state (instantly displays static data)
 
@@ -1425,7 +1639,7 @@ async function renderEvents() {
         day: 'numeric', month: 'short', year: 'numeric'
       });
       
-      const isRegistered = state.user && e.attendees.some(att => att._id === state.user.id || att === state.user.id);
+      const isRegistered = state.user && e.attendees.some(att => att._id === state.user._id || att === state.user._id);
       
       return `
         <div class="relative timeline-item pl-10 pb-12 text-left">
@@ -1655,7 +1869,7 @@ async function renderBlogDetails(id) {
       
       <!-- Article Header -->
       <div class="space-y-4">
-        <div class="flex items-center gap-3 text-xs text-slate-450 font-bold uppercase tracking-wider">
+        <div class="flex items-center gap-3 text-xs text-slate-400 font-bold uppercase tracking-wider">
           <span class="text-brand-indigo">${blog.category}</span>
           <span>•</span>
           <span>${formattedDate}</span>
@@ -2023,7 +2237,7 @@ function toggleAuthTab(tab) {
           <div class="flex-grow border-t border-slate-200"></div>
         </div>
 
-        <button type="button" class="w-full py-3 border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+        <button type="button" id="google-signin-btn" class="w-full py-3 border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
           <svg class="w-4 h-4" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.77c-.98.66-2.23 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -2067,6 +2281,9 @@ function toggleAuthTab(tab) {
       }
     });
 
+    // Bind Google Event
+    document.getElementById('google-signin-btn')?.addEventListener('click', handleGoogleAuthFlow);
+
   } else {
     btnSignin.className = 'auth-toggle-btn inactive';
     btnSignup.className = 'auth-toggle-btn active';
@@ -2098,7 +2315,7 @@ function toggleAuthTab(tab) {
           <div class="flex-grow border-t border-slate-200"></div>
         </div>
 
-        <button type="button" class="w-full py-3 border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+        <button type="button" id="google-signup-btn" class="w-full py-3 border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
           <svg class="w-4 h-4" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.77c-.98.66-2.23 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -2142,6 +2359,60 @@ function toggleAuthTab(tab) {
         showToast('Connection Error', 'Cannot establish registry link.', 'error');
       }
     });
+
+    // Bind Google Event
+    document.getElementById('google-signup-btn')?.addEventListener('click', handleGoogleAuthFlow);
+  }
+}
+
+// Google OAuth Client Trigger Routine
+function handleGoogleAuthFlow() {
+  if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) {
+    showToast('Google Sign-In Error', 'Google SDK is loading. Please retry in a moment.', 'error');
+    return;
+  }
+
+  const client_id = state.settings.googleClientId || '1008059048244-ij0rj8pqla7374ca5v7g19vt9g7742SG.apps.googleusercontent.com';
+
+  const tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id,
+    scope: 'email profile',
+    callback: async (tokenResponse) => {
+      if (tokenResponse.error) {
+        showToast('Google Auth Refused', tokenResponse.error_description || 'Auth window closed.', 'error');
+        return;
+      }
+      if (tokenResponse.access_token) {
+        await handleGoogleLoginSuccess(tokenResponse.access_token);
+      }
+    }
+  });
+  tokenClient.requestAccessToken();
+}
+
+async function handleGoogleLoginSuccess(accessToken) {
+  try {
+    const res = await fetch(`${API_URL}/auth/google`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accessToken })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      state.token = data.token;
+      state.user = data.user;
+      localStorage.setItem('token', data.token);
+
+      showToast('Welcome!', `Logged in successfully as ${data.user.name} via Google.`, 'success');
+      updateNavUI();
+      window.location.hash = '#dashboard';
+    } else {
+      showToast('Google Auth Denied', data.message || 'Token verification failed.', 'error');
+    }
+  } catch (error) {
+    console.error(error);
+    showToast('Server Connection Failed', 'Failed to communicate with authorization server.', 'error');
   }
 }
 
@@ -2346,19 +2617,19 @@ async function renderDashProfile() {
           <h4 class="text-sm font-bold text-slate-200 uppercase tracking-wider border-b border-brand-indigo/10 pb-2">Profile Card</h4>
           <div class="text-xs space-y-3">
             <div>
-              <span class="text-slate-450 block font-bold">ACCOUNT NAME</span>
+              <span class="text-slate-400 block font-bold">ACCOUNT NAME</span>
               <span class="text-slate-200 font-medium text-sm mt-0.5 block">${state.user.name}</span>
             </div>
             <div>
-              <span class="text-slate-450 block font-bold">SECURE EMAIL</span>
+              <span class="text-slate-400 block font-bold">SECURE EMAIL</span>
               <span class="text-slate-200 font-medium text-sm mt-0.5 block">${state.user.email}</span>
             </div>
             <div>
-              <span class="text-slate-450 block font-bold">ROLE SECURITY LEVEL</span>
+              <span class="text-slate-400 block font-bold">ROLE SECURITY LEVEL</span>
               <span class="text-brand-cyan font-bold text-xs mt-0.5 inline-block uppercase tracking-wider px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/20">${state.user.role}</span>
             </div>
             <div>
-              <span class="text-slate-450 block font-bold">CREATION TIMESTAMP</span>
+              <span class="text-slate-400 block font-bold">CREATION TIMESTAMP</span>
               <span class="text-slate-400 mt-0.5 block">${new Date(state.user.createdAt).toLocaleString()}</span>
             </div>
           </div>
@@ -2497,38 +2768,37 @@ function renderServiceFormModal(item = null) {
         <form id="service-crud-form" class="space-y-3 text-xs">
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Service Title</label>
+              <label class="text-slate-400 font-bold uppercase">Service Title</label>
               <input type="text" id="ms-title" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.title : ''}" required>
             </div>
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Lucide Icon Class</label>
+              <label class="text-slate-400 font-bold uppercase">Lucide Icon Class</label>
               <input type="text" id="ms-icon" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.icon : 'cpu'}" required>
             </div>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Brief description</label>
+            <label class="text-slate-400 font-bold uppercase">Brief description</label>
             <input type="text" id="ms-description" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.description : ''}" required>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Image URL</label>
-            <input type="url" id="ms-image" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.image : 'https://images.unsplash.com/photo-1531746790731-6c087fecd772?auto=format&fit=crop&w=600&q=80'}" required>
+            ${createImageUploaderHtml('ms-image', 'Service Image', item ? item.image : 'https://images.unsplash.com/photo-1531746790731-6c087fecd772?auto=format&fit=crop&w=600&q=80')}
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Pricing estimate (£)</label>
+              <label class="text-slate-400 font-bold uppercase">Pricing estimate (£)</label>
               <input type="number" id="ms-price" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.price : 1000}" required>
             </div>
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Delivery turnaround</label>
+              <label class="text-slate-400 font-bold uppercase">Delivery turnaround</label>
               <input type="text" id="ms-delivery" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.deliveryTime : '3-5 days'}" required>
             </div>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Detailed Specs (Markdown / Text)</label>
+            <label class="text-slate-400 font-bold uppercase">Detailed Specs (Markdown / Text)</label>
             <textarea id="ms-details" rows="4" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white">${item ? item.details || '' : ''}</textarea>
           </div>
 
@@ -2689,28 +2959,27 @@ function renderBlogFormModal(item = null) {
 
         <form id="blog-crud-form" class="space-y-3 text-xs">
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Article Title</label>
+            <label class="text-slate-400 font-bold uppercase">Article Title</label>
             <input type="text" id="mb-title" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.title : ''}" required>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Category Tag</label>
+              <label class="text-slate-400 font-bold uppercase">Category Tag</label>
               <input type="text" id="mb-category" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.category : 'Web Development'}" required>
             </div>
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Author Name</label>
+              <label class="text-slate-400 font-bold uppercase">Author Name</label>
               <input type="text" id="mb-author" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.author : 'Marcus Cole (CTO)'}" required>
             </div>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Feature Image URL</label>
-            <input type="url" id="mb-image" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.image : 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80'}" required>
+            ${createImageUploaderHtml('mb-image', 'Feature Image', item ? item.image : 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80')}
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Content Text (supports long paragraphs)</label>
+            <label class="text-slate-400 font-bold uppercase">Content Text (supports long paragraphs)</label>
             <textarea id="mb-content" rows="6" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" required>${item ? item.content : ''}</textarea>
           </div>
 
@@ -2794,8 +3063,9 @@ async function renderDashManageEvents() {
       <td class="px-6 py-4 text-slate-400 font-mono">${new Date(e.date).toLocaleDateString()}</td>
       <td class="px-6 py-4 text-slate-400 font-bold font-mono">${e.attendees.length} Attendees</td>
       <td class="px-6 py-4 flex gap-2">
-        <button onclick="editEventModal('${e._id}')" class="px-2.5 py-1.5 bg-brand-indigo/10 border border-brand-indigo/20 rounded-md hover:bg-brand-indigo text-slate-200 hover:text-white transition-all">Edit</button>
-        <button onclick="deleteEventTrigger('${e._id}')" class="px-2.5 py-1.5 bg-rose-500/10 border border-rose-500/20 rounded-md hover:bg-rose-500 text-slate-200 hover:text-white transition-all">Delete</button>
+        <button onclick="viewEventAttendees('${e._id}')" class="px-2.5 py-1.5 bg-brand-cyan/10 border border-brand-cyan/20 rounded-md hover:bg-brand-cyan text-slate-200 hover:text-white transition-all font-semibold">Attendees</button>
+        <button onclick="editEventModal('${e._id}')" class="px-2.5 py-1.5 bg-brand-indigo/10 border border-brand-indigo/20 rounded-md hover:bg-brand-indigo text-slate-200 hover:text-white transition-all font-semibold">Edit</button>
+        <button onclick="deleteEventTrigger('${e._id}')" class="px-2.5 py-1.5 bg-rose-500/10 border border-rose-500/20 rounded-md hover:bg-rose-500 text-slate-200 hover:text-white transition-all font-semibold">Delete</button>
       </td>
     </tr>
   `).join('');
@@ -2847,6 +3117,89 @@ function editEventModal(id) {
   renderEventFormModal(event);
 }
 
+function viewEventAttendees(eventId) {
+  const event = state.events.find(e => e._id === eventId);
+  if (!event) return;
+
+  const container = document.getElementById('crud-modal-container');
+  if (!container) return;
+
+  const renderAttendeeList = () => {
+    if (!event.attendees || event.attendees.length === 0) {
+      return `<tr><td colspan="3" class="px-4 py-6 text-center text-slate-500">No attendees registered yet.</td></tr>`;
+    }
+    return event.attendees.map(att => `
+      <tr class="border-b border-brand-indigo/5 text-xs text-slate-350 hover:bg-brand-dark/20" id="att-row-${att._id}">
+        <td class="px-4 py-3 font-semibold text-white">${att.name || 'Anonymous User'}</td>
+        <td class="px-4 py-3 font-mono">${att.email}</td>
+        <td class="px-4 py-3 text-right">
+          <button onclick="removeAttendeeTrigger('${event._id}', '${att._id}')" class="px-2.5 py-1 bg-rose-500/10 border border-rose-500/20 rounded-md hover:bg-rose-500 text-slate-200 hover:text-white transition-all font-bold">Remove</button>
+        </td>
+      </tr>
+    `).join('');
+  };
+
+  container.innerHTML = `
+    <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-brand-indigo/15 max-w-lg w-full bg-brand-darker space-y-4">
+        <div class="flex items-center justify-between border-b border-brand-indigo/10 pb-3">
+          <div>
+            <h4 class="text-base font-bold text-white">Event Attendees</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">${event.title}</p>
+          </div>
+          <button onclick="closeCrudModal()" class="p-1 rounded-lg hover:bg-brand-dark text-slate-400 hover:text-white transition-colors"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+
+        <div class="overflow-x-auto border border-brand-indigo/10 rounded-xl bg-brand-dark/45 max-h-[300px]">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-brand-dark/60 border-b border-brand-indigo/10 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                <th class="px-4 py-2.5">Name</th>
+                <th class="px-4 py-2.5">Email</th>
+                <th class="px-4 py-2.5 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="event-attendees-list-body">
+              ${renderAttendeeList()}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+  lucide.createIcons();
+}
+
+async function removeAttendeeTrigger(eventId, userId) {
+  if (!confirm('Are you sure you want to remove this user from the event registration list?')) return;
+  try {
+    const res = await fetch(`${API_URL}/events/${eventId}/unregister`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ userId })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('Attendee Removed', 'User seat cancellation completed.', 'info');
+      // Refresh events from database
+      const fetchRes = await fetch(`${API_URL}/events`);
+      const fetchData = await fetchRes.json();
+      if (fetchData.success) {
+        state.events = fetchData.data;
+        // Re-render dashboard table
+        renderDashManageEvents();
+        // Refresh the attendees modal content
+        viewEventAttendees(eventId);
+      }
+    } else {
+      showToast('Error', data.message || 'Failed to remove attendee.', 'error');
+    }
+  } catch (err) {
+    console.error(err);
+    showToast('Network Error', 'Cannot link to database servers.', 'error');
+  }
+}
+
 function renderEventFormModal(item = null) {
   const container = document.getElementById('crud-modal-container');
   if (!container) return;
@@ -2868,31 +3221,30 @@ function renderEventFormModal(item = null) {
 
         <form id="event-crud-form" class="space-y-3 text-xs">
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Meetup Event Title</label>
+            <label class="text-slate-400 font-bold uppercase">Meetup Event Title</label>
             <input type="text" id="me-title" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.title : ''}" required>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Brief description</label>
+            <label class="text-slate-400 font-bold uppercase">Brief description</label>
             <input type="text" id="me-description" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.description : ''}" required>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Cover Image URL</label>
-            <input type="url" id="me-image" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.image : 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80'}" required>
+            ${createImageUploaderHtml('me-image', 'Cover Image', item ? item.image : 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80')}
           </div>
 
           <div class="grid grid-cols-3 gap-3">
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Date</label>
+              <label class="text-slate-400 font-bold uppercase">Date</label>
               <input type="date" id="me-date" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${dateVal}" required>
             </div>
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">Start Time</label>
+              <label class="text-slate-400 font-bold uppercase">Start Time</label>
               <input type="text" id="me-time" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.time : '6:00 PM'}" required>
             </div>
             <div class="space-y-1">
-              <label class="text-slate-405 font-bold uppercase">HQ Location</label>
+              <label class="text-slate-400 font-bold uppercase">HQ Location</label>
               <input type="text" id="me-location" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.location : 'Sunderland Software Centre'}" required>
             </div>
           </div>
@@ -3032,22 +3384,21 @@ function openGalleryCreateModal() {
 
         <form id="gallery-crud-form" class="space-y-3 text-xs">
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Asset Title</label>
+            <label class="text-slate-400 font-bold uppercase">Asset Title</label>
             <input type="text" id="mg-title" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" placeholder="Collaborative Hub" required>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Category tag</label>
+            <label class="text-slate-400 font-bold uppercase">Category tag</label>
             <input type="text" id="mg-category" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" placeholder="Workplace" required>
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Image URL (Unsplash or direct source)</label>
-            <input type="url" id="mg-image" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" placeholder="https://images.unsplash.com/photo-..." required>
+            ${createImageUploaderHtml('mg-image', 'Image Asset', '')}
           </div>
 
           <div class="space-y-1">
-            <label class="text-slate-405 font-bold uppercase">Caption / Description</label>
+            <label class="text-slate-400 font-bold uppercase">Caption / Description</label>
             <input type="text" id="mg-description" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" placeholder="Brief visual overview details.">
           </div>
 
@@ -3236,7 +3587,7 @@ function viewReplyInquiryModal(id) {
           </div>
 
           <form id="inquiry-reply-form" class="space-y-2 pt-2 border-t border-brand-indigo/10">
-            <label class="text-[10px] font-bold text-slate-450 uppercase">Draft Reply text (Status will update to 'Resolved')</label>
+            <label class="text-[10px] font-bold text-slate-400 uppercase">Draft Reply text (Status will update to 'Resolved')</label>
             <textarea id="reply-text" rows="3" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" placeholder="Hello client, we have reviewed your blueprint..." required></textarea>
             <button type="submit" class="w-full py-2.5 bg-brand-indigo hover:bg-brand-indigo-hover text-white font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-1">
               <i data-lucide="corner-up-left" class="w-4 h-4"></i> Send Reply Ticket
@@ -3426,27 +3777,31 @@ async function renderDashSettings() {
           <h4 class="text-xs font-bold text-brand-indigo uppercase tracking-wider">General Information</h4>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Company Identity</label>
+              <label class="text-slate-400 font-bold uppercase">Company Identity</label>
               <input type="text" id="set-company" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.companyName || 'AI-Solutions'}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Support Email Address</label>
+              <label class="text-slate-400 font-bold uppercase">Support Email Address</label>
               <input type="email" id="set-email" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.officeEmail || 'hello@ai-solutions.co.uk'}" required>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Office Phone Line</label>
+              <label class="text-slate-400 font-bold uppercase">Office Phone Line</label>
               <input type="text" id="set-phone" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.officePhone || '+44 191 000 0000'}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">HQ Office Physical Address</label>
+              <label class="text-slate-400 font-bold uppercase">HQ Office Physical Address</label>
               <input type="text" id="set-address" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.officeAddress || 'Sunderland Software Centre'}" required>
             </div>
           </div>
           <div class="space-y-1.5">
-            <label class="text-slate-405 font-bold uppercase">Company Mission Statement</label>
+            <label class="text-slate-400 font-bold uppercase">Company Mission Statement</label>
             <textarea id="set-mission" rows="2" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" required>${s.mission || ''}</textarea>
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-slate-400 font-bold uppercase">Google Client ID (For Google Login)</label>
+            <input type="text" id="set-googleclientid" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.googleClientId || ''}" required>
           </div>
         </div>
 
@@ -3455,21 +3810,20 @@ async function renderDashSettings() {
           <h4 class="text-xs font-bold text-brand-indigo uppercase tracking-wider">Hero Section</h4>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Hero Pre-Heading</label>
+              <label class="text-slate-400 font-bold uppercase">Hero Pre-Heading</label>
               <input type="text" id="set-heropre" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.heroPreheading || 'AI · SUNDERLAND · UK'}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Hero Title</label>
+              <label class="text-slate-400 font-bold uppercase">Hero Title</label>
               <input type="text" id="set-herotitle" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.heroTitle || ''}" required>
             </div>
           </div>
           <div class="space-y-1.5">
-            <label class="text-slate-405 font-bold uppercase">Hero Description Subtitle</label>
+            <label class="text-slate-400 font-bold uppercase">Hero Description Subtitle</label>
             <input type="text" id="set-herosub" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.heroSubtitle || ''}" required>
           </div>
           <div class="space-y-1.5">
-            <label class="text-slate-405 font-bold uppercase">Hero Side Image URL</label>
-            <input type="url" id="set-heroimage" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.heroImage || ''}" required>
+            ${createImageUploaderHtml('set-heroimage', 'Hero Side Image', s.heroImage || '')}
           </div>
         </div>
 
@@ -3478,35 +3832,34 @@ async function renderDashSettings() {
           <h4 class="text-xs font-bold text-brand-indigo uppercase tracking-wider">About Company Section</h4>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">About Header Title</label>
+              <label class="text-slate-400 font-bold uppercase">About Header Title</label>
               <input type="text" id="set-abouttitle" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.aboutTitle || ''}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">About Side Image URL</label>
-              <input type="url" id="set-aboutimage" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.aboutImage || ''}" required>
+              ${createImageUploaderHtml('set-aboutimage', 'About Side Image', s.aboutImage || '')}
             </div>
           </div>
           <div class="space-y-1.5">
-            <label class="text-slate-405 font-bold uppercase">About Main Text</label>
+            <label class="text-slate-400 font-bold uppercase">About Main Text</label>
             <textarea id="set-abouttext" rows="3" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" required>${s.aboutText || ''}</textarea>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Global Reach Feature text</label>
+              <label class="text-slate-400 font-bold uppercase">Global Reach Feature text</label>
               <input type="text" id="set-aboutreach" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.aboutGlobalReach || ''}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Award Winning Feature text</label>
+              <label class="text-slate-400 font-bold uppercase">Award Winning Feature text</label>
               <input type="text" id="set-aboutaward" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.aboutAwardWinning || ''}" required>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Successful Clients %</label>
+              <label class="text-slate-400 font-bold uppercase">Successful Clients %</label>
               <input type="text" id="set-aboutclients" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.aboutClientsPct || ''}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Completed Projects Count</label>
+              <label class="text-slate-400 font-bold uppercase">Completed Projects Count</label>
               <input type="text" id="set-aboutprojects" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.aboutProjectsCount || ''}" required>
             </div>
           </div>
@@ -3517,21 +3870,21 @@ async function renderDashSettings() {
           <h4 class="text-xs font-bold text-brand-indigo uppercase tracking-wider">Why Choose Us & CTA</h4>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Choose Us Banner Title</label>
+              <label class="text-slate-400 font-bold uppercase">Choose Us Banner Title</label>
               <input type="text" id="set-choosetitle" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.whyChooseUsTitle || ''}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Choose Us Banner Description</label>
+              <label class="text-slate-400 font-bold uppercase">Choose Us Banner Description</label>
               <input type="text" id="set-choosetext" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.whyChooseUsText || ''}" required>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Bottom CTA Card Title</label>
+              <label class="text-slate-400 font-bold uppercase">Bottom CTA Card Title</label>
               <input type="text" id="set-ctatitle" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.bottomCtaTitle || ''}" required>
             </div>
             <div class="space-y-1.5">
-              <label class="text-slate-405 font-bold uppercase">Bottom CTA Card Subtext</label>
+              <label class="text-slate-400 font-bold uppercase">Bottom CTA Card Subtext</label>
               <input type="text" id="set-ctatext" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" value="${s.bottomCtaText || ''}" required>
             </div>
           </div>
@@ -3569,6 +3922,7 @@ async function renderDashSettings() {
       whyChooseUsText: document.getElementById('set-choosetext').value.trim(),
       bottomCtaTitle: document.getElementById('set-ctatitle').value.trim(),
       bottomCtaText: document.getElementById('set-ctatext').value.trim(),
+      googleClientId: document.getElementById('set-googleclientid').value.trim(),
     };
 
     try {
@@ -3609,12 +3963,12 @@ async function renderDashPassword() {
 
       <form id="dash-pass-form" class="space-y-4 text-xs max-w-sm">
         <div class="space-y-1.5">
-          <label class="text-slate-405 font-bold uppercase">Current Password</label>
+          <label class="text-slate-400 font-bold uppercase">Current Password</label>
           <input type="password" id="cp-current" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" placeholder="••••••••" required>
         </div>
 
         <div class="space-y-1.5">
-          <label class="text-slate-405 font-bold uppercase">New Password (Min 6 chars)</label>
+          <label class="text-slate-400 font-bold uppercase">New Password (Min 6 chars)</label>
           <input type="password" id="cp-new" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-indigo" placeholder="••••••••" required>
         </div>
 
@@ -3745,26 +4099,29 @@ async function renderDashUserEvents() {
     if (data.success) state.events = data.data;
   } catch (e) {}
 
-  // Filter events registered by current user
+  // Filter events registered by current user (fix: match using state.user._id)
   const registered = state.events.filter(e => 
-    e.attendees.some(att => att._id === state.user.id || att === state.user.id)
+    e.attendees.some(att => att._id === state.user._id || att === state.user._id)
   );
 
   const cardsHtml = registered.map(e => `
-    <div class="p-4 rounded-xl border border-brand-indigo/10 bg-brand-dark/30 flex gap-4 items-start">
-      <div class="w-24 h-16 rounded-lg overflow-hidden border border-brand-indigo/5 shrink-0">
-        <img src="${e.image}" alt="${e.title}" class="w-full h-full object-cover">
-      </div>
-      <div class="space-y-1.5 flex-grow">
-        <h4 class="text-sm font-bold text-white">${e.title}</h4>
-        <div class="flex flex-wrap gap-2 text-[9px] text-slate-450 font-bold uppercase tracking-wider items-center">
-          <span class="text-brand-indigo"><i data-lucide="calendar" class="w-3 h-3 inline mr-0.5"></i> ${new Date(e.date).toLocaleDateString()}</span>
-          <span>•</span>
-          <span class="text-brand-cyan"><i data-lucide="clock" class="w-3 h-3 inline mr-0.5"></i> ${e.time}</span>
-          <span>•</span>
-          <span><i data-lucide="map-pin" class="w-3 h-3 inline mr-0.5"></i> ${e.location}</span>
+    <div class="p-4 rounded-xl border border-brand-indigo/10 bg-brand-dark/30 flex gap-4 items-start justify-between">
+      <div class="flex gap-4 items-start">
+        <div class="w-24 h-16 rounded-lg overflow-hidden border border-brand-indigo/5 shrink-0">
+          <img src="${e.image}" alt="${e.title}" class="w-full h-full object-cover">
+        </div>
+        <div class="space-y-1.5 flex-grow">
+          <h4 class="text-sm font-bold text-white">${e.title}</h4>
+          <div class="flex flex-wrap gap-2 text-[9px] text-slate-400 font-bold uppercase tracking-wider items-center">
+            <span class="text-brand-indigo"><i data-lucide="calendar" class="w-3 h-3 inline mr-0.5"></i> ${new Date(e.date).toLocaleDateString()}</span>
+            <span>•</span>
+            <span class="text-brand-cyan"><i data-lucide="clock" class="w-3 h-3 inline mr-0.5"></i> ${e.time}</span>
+            <span>•</span>
+            <span><i data-lucide="map-pin" class="w-3 h-3 inline mr-0.5"></i> ${e.location}</span>
+          </div>
         </div>
       </div>
+      <button onclick="unregisterEventTrigger('${e._id}')" class="px-2.5 py-1.5 bg-rose-500/10 border border-rose-500/20 rounded-md hover:bg-rose-500 text-slate-200 hover:text-white transition-all text-[10px] font-bold self-center shrink-0">Cancel Seat</button>
     </div>
   `).join('');
 
@@ -3781,6 +4138,26 @@ async function renderDashUserEvents() {
     </div>
   `;
   lucide.createIcons();
+}
+
+async function unregisterEventTrigger(eventId) {
+  if (!confirm('Are you sure you want to cancel your seat for this event?')) return;
+  try {
+    const res = await fetch(`${API_URL}/events/${eventId}/unregister`, {
+      method: 'POST',
+      headers: getHeaders()
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('Seat Cancelled', 'Your registration has been cancelled successfully.', 'info');
+      await renderDashUserEvents();
+    } else {
+      showToast('Error', data.message || 'Cancellation failed.', 'error');
+    }
+  } catch (error) {
+    console.error(error);
+    showToast('Network Error', 'Cannot link to database servers.', 'error');
+  }
 }
 
 // Tab: MANAGE TEAM (Admin Only CRUD)
@@ -3897,8 +4274,7 @@ function renderTeamFormModal(item = null) {
           </div>
 
           <div class="space-y-1.5">
-            <label class="text-slate-400 font-bold uppercase">Image URL</label>
-            <input type="url" id="mt-image" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.image : ''}" required>
+            ${createImageUploaderHtml('mt-image', 'Photo', item ? item.image : '')}
           </div>
 
           <button type="submit" class="w-full py-3 bg-brand-indigo hover:bg-brand-indigo-hover text-white font-bold rounded-xl transition-all shadow-md mt-2 flex items-center justify-center gap-1.5">
@@ -4066,6 +4442,10 @@ function renderTestimonialFormModal(item = null) {
             <input type="number" id="mt-stars" min="1" max="5" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.stars : 5}" required>
           </div>
 
+          <div class="space-y-1.5">
+            ${createImageUploaderHtml('mt-image', 'Author Photo', item ? item.image : '')}
+          </div>
+
           <button type="submit" class="w-full py-3 bg-brand-indigo hover:bg-brand-indigo-hover text-white font-bold rounded-xl transition-all shadow-md mt-2 flex items-center justify-center gap-1.5">
             <i data-lucide="check" class="w-4 h-4"></i> ${isEdit ? 'Save Changes' : 'Add Testimonial'}
           </button>
@@ -4081,7 +4461,8 @@ function renderTestimonialFormModal(item = null) {
       quote: document.getElementById('mt-quote').value.trim(),
       author: document.getElementById('mt-author').value.trim(),
       role: document.getElementById('mt-role-company').value.trim(),
-      stars: Number(document.getElementById('mt-stars').value)
+      stars: Number(document.getElementById('mt-stars').value),
+      image: document.getElementById('mt-image').value.trim()
     };
 
     const url = isEdit ? `${API_URL}/testimonials/${item._id}` : `${API_URL}/testimonials`;

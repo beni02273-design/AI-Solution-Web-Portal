@@ -101,6 +101,11 @@ const SiteSettingsSchema = new mongoose.Schema({
     required: true,
     default: 'Talk to our team in Sunderland about an AI virtual assistant, a rapid prototype or a full custom build.',
   },
+  googleClientId: {
+    type: String,
+    required: true,
+    default: '1008059048244-ij0rj8pqla7374ca5v7g19vt9g7742SG.apps.googleusercontent.com',
+  },
 });
 
 module.exports = mongoose.model('SiteSettings', SiteSettingsSchema);

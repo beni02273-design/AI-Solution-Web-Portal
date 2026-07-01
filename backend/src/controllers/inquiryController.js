@@ -129,15 +129,13 @@ const chatAssistant = async (req, res) => {
     };
 
     if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
-      replyText = `Hello! I am the AI-Solutions Virtual Assistant. 🤖 It is great to connect with you today! I can help you explore our services, give you details about our Sunderland headquarters, or even generate a customized project prototype blueprint for your startup idea.\n\nWhat kind of project are you thinking of building? Tell me a bit about it and we can design a blueprint together!`;
+      replyText = `Hey there! 👋 I'm Aida. Great to chat with you! I can tell you about our services, our Sunderland HQ, or generate a quick project cost blueprint. What are you working on?`;
     } else if (query.includes('office') || query.includes('address') || query.includes('location') || query.includes('sunderland')) {
-      replyText = `We are proudly based in Sunderland, UK! 🇬🇧\n\nOur headquarters is located at:\n**${settings.officeAddress}**\n\nIt is a modern, high-tech engineering hub located right next to Mowbray Park, just a 3-minute walk from Sunderland Central train station. If you'd like to get in touch, you can reach us on **${settings.officePhone}** or email us at **${settings.officeEmail}**. Feel free to stop by if you're in the area!`;
+      replyText = `We're proudly based in Sunderland, UK! 📍 You can find our main studio at: ${settings.officeAddress}. Hit us up at ${settings.officePhone} or ${settings.officeEmail} if you want to chat!`;
     } else if (query.includes('mission') || query.includes('aim') || query.includes('goal')) {
-      replyText = `At AI-Solutions, our core mission is:\n\n*"${settings.mission}"*\n\nWe focus on utilizing AI and modern software design to support employee teams, automate complex tasks, and make digital workflows a positive experience. Let me know if you would like to see how our services align with this goal!`;
+      replyText = `At AI-Solutions, our goal is simple: "${settings.mission}". We build smart AI tools to help teams work better and automate the boring stuff. 🚀`;
     } else if (query.includes('services') || query.includes('what do you do') || query.includes('help')) {
-      const services = await Service.find().limit(4);
-      const serviceList = services.map(s => `• **${s.title}**: ${s.description}`).join('\n');
-      replyText = `We offer a wide range of expert services tailored for business transformation:\n\n${serviceList || '• AI Virtual Assistant\n• Rapid AI Prototyping\n• Custom Software Development\n• Digital Employee Experience consultancy'}\n\nIf you have a specific project idea in mind, just ask me to **"generate a prototype for my e-commerce"** or describe your concept, and I'll create a step-by-step blueprint with cost estimations for you!`;
+      replyText = `We build cool stuff! Here is a quick list of what we offer:\n• AI Assistants 🧠\n• Rapid Prototyping 🎨\n• Custom Software 💻\n• Digital Employee Experience consultancy 🌐\n\nWant me to estimate a project for you? Just say "estimate an e-commerce app"!`;
     } else if (
       query.includes('prototype') ||
       query.includes('build') ||
@@ -184,7 +182,7 @@ const chatAssistant = async (req, res) => {
         timeframe = '4-5 weeks';
       }
 
-      replyText = `That sounds like a brilliant project! To help you plan, I have compiled a **Rapid Prototyping Blueprint** for your **${projectType}**.\n\nYou can review the recommended technical details in the card below. If you're signed in, you can click **"Save Prototype to Inquiries"** to add this plan straight to your dashboard profile. Our engineering team in Sunderland will review it and get back to you!`;
+      replyText = `Sounds like a plan! I've put together a quick project blueprint for your ${projectType} below. 👇 (Save it to inquiries if you like, and we'll check it out!)`;
 
       prototypeDetails = {
         projectName: projectType,
@@ -195,7 +193,7 @@ const chatAssistant = async (req, res) => {
         timeframe: timeframe,
       };
     } else {
-      replyText = `I would love to help you with that! To give you the most accurate response, could you describe what you're hoping to build or what details you need?\n\nFor example, if you are looking for a price estimate, try asking **"how much to build a SaaS dashboard app?"** or **"need an e-commerce website prototype"**, and I will generate a comprehensive blueprint for you.`;
+      replyText = `Not sure I got that, but I'm happy to help! Ask me about our services, Sunderland HQ, or just say "estimate a SaaS dashboard" to get a quick project blueprint. 💬`;
     }
 
     res.json({

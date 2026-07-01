@@ -28,6 +28,7 @@ app.use('/api/notifications', require('./src/routes/notificationRoutes'));
 app.use('/api/team', require('./src/routes/teamRoutes'));
 app.use('/api/testimonials', require('./src/routes/testimonialRoutes'));
 app.use('/api/partners', require('./src/routes/partnerRoutes'));
+app.use('/api/upload', require('./src/routes/uploadRoutes'));
 
 // Serve Static Assets in production/development
 app.use(express.static(path.join(__dirname, '../frontend')));
@@ -40,5 +41,5 @@ app.get('*any', (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running in mode on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

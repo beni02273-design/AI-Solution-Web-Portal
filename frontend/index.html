@@ -56,12 +56,12 @@
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center space-x-8">
           <a href="#home" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">Home</a>
-          <a href="#about" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">About Us</a>
+          <a href="#about" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">About</a>
           <a href="#services" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">Services</a>
           <a href="#events" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">Events</a>
           <a href="#blogs" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">Blogs</a>
           <a href="#gallery" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">Gallery</a>
-          <a href="#contact" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">Contact Us</a>
+          <a href="#contact" class="text-slate-600 hover:text-brand-indigo transition-colors text-sm font-semibold">Contact</a>
         </nav>
 
         <!-- Auth Actions / CTA Button -->
@@ -87,12 +87,12 @@
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-navigation-drawer" class="md:hidden hidden border-b border-brand-indigo/10 bg-brand-deep/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-3">
       <a href="#home" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Home</a>
-      <a href="#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">About Us</a>
+      <a href="#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">About</a>
       <a href="#services" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Services</a>
       <a href="#events" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Events</a>
       <a href="#blogs" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Blogs</a>
       <a href="#gallery" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Gallery</a>
-      <a href="#contact" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Contact Us</a>
+      <a href="#contact" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-brand-dark/50">Contact</a>
       <hr class="border-brand-indigo/10 my-2">
       <div id="mobile-nav-auth-container" class="px-3">
         <!-- Dynamic auth content for mobile will inject here -->
@@ -122,7 +122,7 @@
   </div>
 
   <!-- Global Footer -->
-  <footer class="bg-brand-deep border-t border-brand-indigo/10 py-16 relative z-10 text-slate-300">
+  <footer class="bg-brand-deep py-16 relative z-10 text-slate-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
         
@@ -139,17 +139,27 @@
           </p>
           <!-- Social Icons -->
           <div class="flex space-x-3 pt-2">
-            <a href="#" class="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-brand-indigo flex items-center justify-center text-slate-400 hover:text-white transition-all">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
+            <a href="#" class="w-8 h-8 rounded-full bg-brand-dark border border-brand-indigo/10 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo flex items-center justify-center text-slate-400 transition-all" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+              </svg>
             </a>
-            <a href="#" class="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-brand-indigo flex items-center justify-center text-slate-400 hover:text-white transition-all">
-              <i data-lucide="twitter" class="w-4 h-4"></i>
+            <a href="#" class="w-8 h-8 rounded-full bg-brand-dark border border-brand-indigo/10 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo flex items-center justify-center text-slate-400 transition-all" aria-label="Twitter">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
             </a>
-            <a href="#" class="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-brand-indigo flex items-center justify-center text-slate-400 hover:text-white transition-all">
-              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            <a href="#" class="w-8 h-8 rounded-full bg-brand-dark border border-brand-indigo/10 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo flex items-center justify-center text-slate-400 transition-all" aria-label="LinkedIn">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
             </a>
-            <a href="#" class="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-brand-indigo flex items-center justify-center text-slate-400 hover:text-white transition-all">
-              <i data-lucide="instagram" class="w-4 h-4"></i>
+            <a href="#" class="w-8 h-8 rounded-full bg-brand-dark border border-brand-indigo/10 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo flex items-center justify-center text-slate-400 transition-all" aria-label="Instagram">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
             </a>
           </div>
         </div>
@@ -225,12 +235,12 @@
       <div class="p-4 bg-gradient-to-r from-brand-indigo to-brand-violet flex items-center justify-between text-white shadow-md">
         <div class="flex items-center space-x-3">
           <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center animate-pulse">
-            <i data-lucide="bot" class="w-5 h-5 text-white"></i>
+            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
           </div>
           <div>
-            <h4 class="text-sm font-bold leading-tight">AI Virtual Assistant</h4>
+            <h4 class="text-sm font-bold leading-tight">Aida</h4>
             <p class="text-[10px] text-indigo-100 flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> Always Online
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span> AI-Solutions Assistant · Online
             </p>
           </div>
         </div>
@@ -244,11 +254,18 @@
         <!-- Initial Message -->
         <div class="flex items-start gap-2">
           <div class="w-8 h-8 rounded-lg bg-brand-indigo/10 flex items-center justify-center text-brand-indigo shrink-0">
-            <i data-lucide="bot" class="w-4 h-4"></i>
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
           </div>
           <div class="chat-bubble bg-brand-dark rounded-r-xl rounded-bl-xl p-3 border border-brand-indigo/5 text-slate-300">
-            Hi! I am the AI-Solutions Virtual Assistant. 🤖 How can I assist you with digital employee experience systems or workspace strategy today?
-            <div class="mt-2 text-[10px] text-slate-400">AI-Solutions Bot</div>
+            <p class="leading-relaxed">👋 Hi, I'm <strong>Aida</strong>, your AI-Solutions assistant.</p>
+            <p class="mt-2 leading-relaxed">I can help you with:</p>
+            <ul class="list-none space-y-1 mt-1 pl-1">
+              <li>🧠 Our services & pricing</li>
+              <li>🗺️ Navigating the website</li>
+              <li>📞 Getting in touch with our team</li>
+            </ul>
+            <p class="mt-2 leading-relaxed">What would you like to explore?</p>
+            <div class="mt-3 text-[9px] text-slate-500">AI Assistant</div>
           </div>
         </div>
       </div>
@@ -268,7 +285,7 @@
 
       <!-- Footer Input Form -->
       <form id="chat-input-form" class="p-3 bg-brand-darker border-t border-brand-indigo/10 flex items-center gap-2">
-        <input type="text" id="chat-input-field" placeholder="Type a message or build request..." class="flex-1 bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-indigo transition-colors" required>
+        <input type="text" id="chat-input-field" placeholder="Ask about our services..." class="flex-1 bg-brand-dark border border-brand-indigo/10 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-indigo transition-colors" required>
         <button type="submit" class="w-9 h-9 rounded-xl bg-brand-indigo hover:bg-brand-indigo-hover text-white flex items-center justify-center transition-colors shadow-md shadow-brand-indigo/10">
           <i data-lucide="send" class="w-4 h-4"></i>
         </button>
@@ -276,8 +293,15 @@
     </div>
 
     <!-- Floating Action Button Toggle -->
-    <button id="chat-toggle" class="pulse-glow w-14 h-14 rounded-full bg-gradient-to-tr from-brand-indigo via-brand-violet to-brand-cyan text-white flex items-center justify-center shadow-lg shadow-brand-indigo/30 hover:scale-105 active:scale-95 transition-all">
-      <i data-lucide="bot" id="chat-icon-bot" class="w-6 h-6"></i>
+    <button id="chat-toggle" class="pulse-glow w-14 h-14 rounded-full bg-[#0070F3] text-white flex items-center justify-center shadow-lg shadow-blue-500/30 hover:scale-105 active:scale-95 transition-all relative">
+      <div id="chat-icon-bot" class="flex items-center justify-center">
+        <!-- Message circle icon -->
+        <i data-lucide="message-circle" class="w-7 h-7 fill-white/10"></i>
+        <!-- Small white badge with blue sparkles on top right -->
+        <div class="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-slate-100 flex items-center justify-center shadow-md">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#0070F3]"></i>
+        </div>
+      </div>
       <i data-lucide="x" id="chat-icon-close" class="w-6 h-6 hidden"></i>
     </button>
 
@@ -285,6 +309,8 @@
 
   <!-- Lucide Icons initialization script -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Sign-In SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <!-- Main Script -->
   <script src="js/script.js"></script>
 </body>

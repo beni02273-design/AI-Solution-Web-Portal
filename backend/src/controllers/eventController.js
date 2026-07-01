@@ -84,8 +84,8 @@ const registerForEvent = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Event not found' });
     }
 
-    // Check if user is already registered
-    if (event.attendees.includes(req.user.id)) {
+    // Check if user is already registered (robust string match check)
+    if (event.attendees.some(attId => attId.toString() === req.user.id)) {
       return res.status(400).json({ success: false, message: 'Already registered for this event' });
     }
 
@@ -106,10 +106,49 @@ const registerForEvent = async (req, res) => {
   }
 };
 
+// @desc    Unregister user from an event
+// @route   POST /api/events/:id/unregister
+// @access  Private
+const unregisterFromEvent = async (req, res) => {
+  const { userId } = req.body;
+  // Admin can unregister other users, normal users unregister themselves
+  const targetUserId = (req.user.role === 'admin' && userId) ? userId : req.user.id;
+
+  try {
+    const event = await Event.findById(req.params.id);
+
+    if (!event) {
+      return res.status(404).json({ success: false, message: 'Event not found' });
+    }
+
+    // Check if user is registered
+    const index = event.attendees.findIndex(attId => attId.toString() === targetUserId);
+    if (index === -1) {
+      return res.status(400).json({ success: false, message: 'User is not registered for this event' });
+    }
+
+    // Remove user from attendees list
+    event.attendees.splice(index, 1);
+    await event.save();
+
+    // Create system notification for user
+    await Notification.create({
+      user: targetUserId,
+      title: 'Event Registration Cancelled',
+      message: `Your registration for "${event.title}" has been cancelled.`,
+    });
+
+    res.json({ success: true, message: 'Successfully unregistered from event', data: event });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   getEvents,
   createEvent,
   updateEvent,
   deleteEvent,
   registerForEvent,
+  unregisterFromEvent,
 };
