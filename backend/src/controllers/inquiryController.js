@@ -129,13 +129,13 @@ const chatAssistant = async (req, res) => {
     };
 
     if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
-      replyText = `Hey there! 👋 I'm Aida. Great to chat with you! I can tell you about our services, our Sunderland HQ, or generate a quick project cost blueprint. What are you working on?`;
+      replyText = `Hey there! 👋 I'm Aida. Great to chat with you! I can tell you about our services, our Sunderland HQ, or estimate a project for you. What are you working on?`;
     } else if (query.includes('office') || query.includes('address') || query.includes('location') || query.includes('sunderland')) {
       replyText = `We're proudly based in Sunderland, UK! 📍 You can find our main studio at: ${settings.officeAddress}. Hit us up at ${settings.officePhone} or ${settings.officeEmail} if you want to chat!`;
     } else if (query.includes('mission') || query.includes('aim') || query.includes('goal')) {
       replyText = `At AI-Solutions, our goal is simple: "${settings.mission}". We build smart AI tools to help teams work better and automate the boring stuff. 🚀`;
     } else if (query.includes('services') || query.includes('what do you do') || query.includes('help')) {
-      replyText = `We build cool stuff! Here is a quick list of what we offer:\n• AI Assistants 🧠\n• Rapid Prototyping 🎨\n• Custom Software 💻\n• Digital Employee Experience consultancy 🌐\n\nWant me to estimate a project for you? Just say "estimate an e-commerce app"!`;
+      replyText = `We build cool stuff! Here is a quick list of what we offer:\n• AI Assistants 🧠\n• Rapid Prototyping 🎨\n• Custom Software 💻\n• Digital Employee Experience consultancy 🌐\n\nWant me to estimate a project for you? Just say "estimate a mobile app"!`;
     } else if (
       query.includes('prototype') ||
       query.includes('build') ||
@@ -182,7 +182,12 @@ const chatAssistant = async (req, res) => {
         timeframe = '4-5 weeks';
       }
 
-      replyText = `Sounds like a plan! I've put together a quick project blueprint for your ${projectType} below. 👇 (Save it to inquiries if you like, and we'll check it out!)`;
+      replyText = `I can help with that! Here is a simple plan for your **${projectType}**:\n\n` +
+                  `• **Key Features:** ${features.join(', ')}\n` +
+                  `• **Technology:** ${stack.replace(' (MERN stack)', '')}\n` +
+                  `• **Estimated Cost:** ${estimate}\n` +
+                  `• **Delivery Time:** ${timeframe}\n\n` +
+                  `Would you like to save this plan to your profile dashboard so our team can review it with you?`;
 
       prototypeDetails = {
         projectName: projectType,
@@ -193,7 +198,7 @@ const chatAssistant = async (req, res) => {
         timeframe: timeframe,
       };
     } else {
-      replyText = `Not sure I got that, but I'm happy to help! Ask me about our services, Sunderland HQ, or just say "estimate a SaaS dashboard" to get a quick project blueprint. 💬`;
+      replyText = `I'm here to help! Ask me about our services, Sunderland HQ, or just tell me what you want to build (e.g. "estimate a mobile app") to get a quick plan. 💬`;
     }
 
     res.json({

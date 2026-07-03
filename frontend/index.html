@@ -14,13 +14,13 @@
         extend: {
           colors: {
             brand: {
-              deep: '#0A1C3F', // Rich dark navy blue
-              darker: '#0b1528',
-              dark: '#0f2042',
-              indigo: '#3B82F6', // Royal blue brand
-              indigoHover: '#2563EB',
-              cyan: '#06B6D4',
-              violet: '#8B5CF6'
+              deep: 'var(--brand-deep, #0A1C3F)',
+              darker: 'var(--brand-darker, #0b1528)',
+              dark: 'var(--brand-dark, #0f2042)',
+              indigo: 'var(--brand-indigo, #3B82F6)',
+              indigoHover: 'var(--brand-indigo-hover, #2563EB)',
+              cyan: 'var(--brand-cyan, #06B6D4)',
+              violet: 'var(--brand-violet, #8B5CF6)'
             }
           }
         }
@@ -312,6 +312,6 @@
   <!-- Google Sign-In SDK -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <!-- Main Script -->
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=3"></script>
 </body>
 </html>

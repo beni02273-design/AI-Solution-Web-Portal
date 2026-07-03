@@ -61,13 +61,13 @@ const seedDB = async () => {
       heroImage: 'https://kindred-ai-vision.lovable.app/assets/hero-person-D8M9l6CF.jpg',
       aboutTitle: 'We provide truly prominent AI solutions for your success',
       aboutText: 'AI-Solutions is the partner of choice for leading enterprises and growing businesses. From our headquarters in Sunderland we deliver AI software, prototypes and consultancy that put people first.',
-      aboutImage: 'https://kindred-ai-vision.lovable.app/assets/why-choose-C6MgmLi8.jpg',
+      aboutImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&h=1000&q=80',
       aboutGlobalReach: 'Trusted by teams across the UK, EU and beyond.',
       aboutAwardWinning: 'Recognised for AI innovation in employee experience.',
       aboutClientsPct: '98%',
       aboutProjectsCount: '590+',
       whyChooseUsTitle: 'Trusted by teams that ship at scale',
-      whyChooseUsText: 'From Sunderland to Singapore, leading brands choose AI-Solutions as their AI partner.',
+      whyChooseUsText: 'Worldwide, leading brands choose AI-Solutions as their AI partner.',
       bottomCtaTitle: 'Ready to bring AI into your business?',
       bottomCtaText: 'Talk to our team in Sunderland about an AI virtual assistant, a rapid prototype or a full custom build.',
       googleClientId: '1008059048244-ij0rj8pqla7374ca5v7g19vt9g7742SG.apps.googleusercontent.com',
@@ -96,7 +96,7 @@ const seedDB = async () => {
         title: 'AI Virtual Assistant',
         description: 'Always-on conversational AI that answers inquiries, qualifies leads, and supports employees in real time.',
         icon: 'cpu',
-        image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd772?auto=format&fit=crop&w=600&q=80',
+        image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80',
         details: 'Our Conversational AI leverages LLMs tailored to your company documentation. Supports lead routing, instant ticket triage, and conversational user registration.',
         price: 750,
         deliveryTime: '3-5 days',
@@ -105,7 +105,7 @@ const seedDB = async () => {
         title: 'Custom Software Development',
         description: 'End-to-end engineering of business applications integrated with your existing tech stack.',
         icon: 'code',
-        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80',
+        image: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80',
         details: 'From requirements mapping through deployment, we build robust backend architectures and clean modern frontends tailored to your operations.',
         price: 4505,
         deliveryTime: '4-6 weeks',
@@ -132,7 +132,7 @@ const seedDB = async () => {
         title: 'Rapid AI Prototyping',
         description: 'Validate ideas in days with affordable AI-powered prototypes ready to test with real users.',
         icon: 'edit-3',
-        image: 'https://images.unsplash.com/photo-1581291518655-9523c932dedf?auto=format&fit=crop&w=600&q=80',
+        image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80',
         details: 'Skip months of specification and coding. We create functional interactive prototypes using generative frameworks in a fraction of the time and cost.',
         price: 1200,
         deliveryTime: '1-2 weeks',
@@ -308,12 +308,12 @@ const seedDB = async () => {
       {
         name: 'Sarah Mitchell',
         role: 'Project Manager',
-        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=700&fit=crop'
+        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=700&fit=crop'
       },
       {
         name: 'Daniel Okafor',
         role: 'Operations Manager',
-        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=700&fit=crop'
+        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=700&fit=crop'
       },
       {
         name: 'James Patel',
@@ -343,22 +343,29 @@ const seedDB = async () => {
         role: 'CTO, Northcoast',
         stars: 5,
         image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&q=80'
+      },
+      {
+        quote: 'The custom software and AI consultancy provided by AI-Solutions helped us optimize our workflows and double our engineering velocity.',
+        author: 'Sarah Jenkins',
+        role: 'Tech Lead, Prelude',
+        stars: 5,
+        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&q=80'
       }
     ]);
     console.log('Testimonials seeded.');
 
     // Create Default Partners
     await Partner.create([
-      { name: 'Boosterio' },
-      { name: 'SEO Mind' },
-      { name: 'Prelude' },
-      { name: 'Logoipsum' },
-      { name: 'JPSN' },
-      { name: 'CircleTech' },
-      { name: 'Northcoast' },
-      { name: 'Stackly' },
-      { name: 'Boxhub' },
-      { name: 'Glowlab' }
+      { name: 'Google' },
+      { name: 'Microsoft' },
+      { name: 'Amazon' },
+      { name: 'Apple' },
+      { name: 'Meta' },
+      { name: 'Netflix' },
+      { name: 'IBM' },
+      { name: 'Salesforce' },
+      { name: 'Oracle' },
+      { name: 'Adobe' }
     ]);
     console.log('Partners seeded.');
 

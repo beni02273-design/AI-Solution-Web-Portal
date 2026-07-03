@@ -200,10 +200,87 @@ const googleAuth = async (req, res) => {
   }
 };
 
+// @desc    Get all registered users (Admin only)
+// @route   GET /api/auth/users
+// @access  Private/Admin
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}).select('-password').sort({ createdAt: -1 });
+    res.status(200).json({ success: true, count: users.length, data: users });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Update user details by Admin (Admin only)
+// @route   PUT /api/auth/users/:id
+// @access  Private/Admin
+const updateUserByAdmin = async (req, res) => {
+  try {
+    const { name, email, role } = req.body;
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    if (name) user.name = name;
+    if (email) {
+      const emailExists = await User.findOne({ email, _id: { $ne: user._id } });
+      if (emailExists) {
+        return res.status(400).json({ success: false, message: 'Email already registered' });
+      }
+      user.email = email;
+    }
+    if (role) {
+      if (req.user._id.toString() === user._id.toString() && role !== 'admin') {
+        return res.status(400).json({ success: false, message: 'Cannot demote your own admin account role' });
+      }
+      user.role = role;
+    }
+
+    const updatedUser = await user.save();
+    res.status(200).json({
+      success: true,
+      data: {
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        role: updatedUser.role
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Delete user by Admin (Admin only)
+// @route   DELETE /api/auth/users/:id
+// @access  Private/Admin
+const deleteUserByAdmin = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    if (req.user._id.toString() === user._id.toString()) {
+      return res.status(400).json({ success: false, message: 'Cannot delete your own admin account' });
+    }
+
+    await user.deleteOne();
+    res.status(200).json({ success: true, message: 'User deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getMe,
   changePassword,
   googleAuth,
+  getAllUsers,
+  updateUserByAdmin,
+  deleteUserByAdmin,
 };

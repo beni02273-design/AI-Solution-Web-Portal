@@ -3,6 +3,15 @@
 :root {
   --font-primary: 'Plus Jakarta Sans', system-ui, sans-serif;
   
+  /* Tailwind Brand Colors mapping variables */
+  --brand-deep: #0A1C3F;
+  --brand-darker: #0b1528;
+  --brand-dark: #0f2042;
+  --brand-indigo: #3B82F6;
+  --brand-indigo-hover: #2563EB;
+  --brand-cyan: #06B6D4;
+  --brand-violet: #8B5CF6;
+  
   /* Color system - Dark Theme focused */
   --bg-deep: #0A1C3F; /* Rich dark navy */
   --bg-darker: #0b1528;
@@ -29,6 +38,55 @@
   --success: #10B981;
   --warning: #F59E0B;
   --error: #EF4444;
+}
+
+/* Dashboard Premium Navy Blue Theme overrides with White Outlines */
+.dashboard-active {
+  --brand-deep: #0A1C3F; /* Deep Navy Blue Page Background */
+  --brand-darker: #061126; /* Darker navy for sidebars/menus */
+  --brand-dark: #0d1e3d; /* Dark navy active items background */
+  --brand-indigo: #3B82F6; /* Standard royal blue */
+  --brand-indigo-hover: #2563EB;
+  --brand-cyan: #06B6D4;
+  --brand-violet: #8B5CF6;
+
+  --bg-deep: #0A1C3F;
+  --bg-darker: #061126;
+  --bg-dark: #0d1e3d;
+  --bg-card: rgba(13, 30, 61, 0.75);
+  --bg-card-hover: rgba(21, 46, 92, 0.85);
+
+  --primary: #3B82F6;
+  --primary-hover: #2563EB;
+  --primary-glow: rgba(59, 130, 246, 0.15);
+
+  --secondary: #06B6D4;
+  --secondary-hover: #0891B2;
+
+  --accent: #8B5CF6;
+
+  --border: rgba(255, 255, 255, 0.22); /* Clean semi-transparent white outline */
+  --border-focus: rgba(255, 255, 255, 0.4);
+}
+
+/* White Outlines for Dashboard sidebar and panels */
+body.dashboard-active aside,
+body.dashboard-active #dash-content-viewport,
+body.dashboard-active #dash-content-viewport > div {
+  border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dashboard-active aside button.dash-active-tab {
+  border-left: 4px solid #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* Modals border and overlay override on dark dashboard */
+body.dashboard-active #crud-modal-container .glass-panel {
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  background-color: #061126 !important;
 }
 
 /* Premium dark theme aesthetic */
@@ -101,35 +159,46 @@ body {
   color: #475569;
 }
 
-/* Dark mode adaptions when dashboard view is active */
-body.bg-brand-deep .glass-navbar {
-  background: var(--bg-deep) !important;
-  border-bottom: 1px solid rgba(59, 130, 246, 0.15) !important;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3) !important;
+/* Keep header same as other pages (light background) when dashboard is active */
+body.dashboard-active .glass-navbar {
+  --brand-deep: #0A1C3F !important;
+  --brand-darker: #0b1528 !important;
+  --brand-dark: #0f2042 !important;
+  --brand-indigo: #3B82F6 !important;
+  --brand-indigo-hover: #2563EB !important;
+  --brand-cyan: #06B6D4 !important;
+  --brand-violet: #8B5CF6 !important;
+
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
 }
 
-body.bg-brand-deep .glass-navbar span.text-slate-900 {
-  color: #ffffff !important;
+body.dashboard-active .glass-navbar span.text-slate-900,
+body.dashboard-active .glass-navbar span.text-slate-900 span {
+  color: #0f172a !important; /* Force dark text logo */
 }
 
-body.bg-brand-deep .glass-navbar nav a:not(.text-brand-indigo) {
-  color: rgba(248, 250, 252, 0.8) !important;
+body.dashboard-active .glass-navbar nav a:not(.text-brand-indigo) {
+  color: #475569 !important; /* Force slate-600 navigation links */
 }
 
-body.bg-brand-deep .glass-navbar nav a:not(.text-brand-indigo):hover {
-  color: var(--primary) !important;
+body.dashboard-active .glass-navbar nav a:not(.text-brand-indigo):hover {
+  color: #3b82f6 !important; /* Standard brand blue hover */
 }
 
-body.bg-brand-deep .glass-navbar #nav-auth-container a:first-child {
-  color: rgba(248, 250, 252, 0.8) !important;
+body.dashboard-active .glass-navbar #nav-auth-container a:first-child:not(.px-5) {
+  color: #475569 !important;
 }
 
-body.bg-brand-deep .glass-navbar #nav-auth-container a:first-child:hover {
-  color: var(--primary) !important;
+body.dashboard-active .glass-navbar #nav-auth-container a:first-child:not(.px-5):hover {
+  color: #3b82f6 !important;
 }
 
-body.bg-brand-deep .glass-navbar #mobile-menu-toggle {
-  color: #cbd5e1;
+body.dashboard-active .glass-navbar #mobile-menu-toggle {
+  color: #475569 !important;
 }
 
 /* Gradients and Glows */
@@ -444,5 +513,84 @@ body.bg-brand-deep .glass-navbar #mobile-menu-toggle {
   border-color: rgba(59, 130, 246, 0.2);
   background-color: #ffffff;
   box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1);
+}
+
+/* Ensure the global footer does not inherit the dashboard theme variables */
+footer {
+  --brand-deep: #0A1C3F !important;
+  --brand-darker: #0b1528 !important;
+  --brand-dark: #0f2042 !important;
+  --brand-indigo: #3B82F6 !important;
+  --brand-indigo-hover: #2563EB !important;
+  --brand-cyan: #06B6D4 !important;
+  --brand-violet: #8B5CF6 !important;
+  
+  background-color: #0A1C3F !important; /* Force original brand navy background */
+}
+
+
+/* Dashboard sidebar horizontal layouts on mobile and tablet viewport widths */
+@media (max-width: 1023px) {
+  body.dashboard-active aside {
+    width: 100% !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+  }
+  
+  body.dashboard-active aside > div:first-child {
+    border-right: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-bottom: none !important;
+    padding: 1rem 1.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    text-align: left !important;
+    flex-shrink: 0 !important;
+  }
+  
+  body.dashboard-active aside > div:first-child .w-16 {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    margin: 0 !important;
+  }
+  
+  body.dashboard-active aside > div:first-child h4 {
+    font-size: 0.8rem !important;
+  }
+  
+  body.dashboard-active aside > div:first-child span {
+    margin-top: 0 !important;
+    font-size: 8px !important;
+  }
+
+  body.dashboard-active aside nav {
+    flex-direction: row !important;
+    padding: 0 1rem !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+  }
+  
+  body.dashboard-active aside nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  body.dashboard-active aside nav button {
+    width: auto !important;
+    padding: 0.75rem 1rem !important;
+    border-left: none !important;
+    border-bottom: 3px solid transparent !important;
+    font-size: 0.75rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  body.dashboard-active aside button.dash-active-tab {
+    border-left: none !important;
+    border-bottom: 3px solid #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }
 

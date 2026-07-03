@@ -12,13 +12,13 @@ const defaultSettings = {
   heroImage: 'https://kindred-ai-vision.lovable.app/assets/hero-person-D8M9l6CF.jpg',
   aboutTitle: 'We provide truly prominent AI solutions for your success',
   aboutText: 'AI-Solutions is the partner of choice for leading enterprises and growing businesses. From our headquarters in Sunderland we deliver AI software, prototypes and consultancy that put people first.',
-  aboutImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
+  aboutImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&h=1000&q=80',
   aboutGlobalReach: 'Trusted by teams across the UK, EU and beyond.',
   aboutAwardWinning: 'Recognised for AI innovation in employee experience.',
   aboutClientsPct: '98%',
   aboutProjectsCount: '590+',
   whyChooseUsTitle: 'Trusted by teams that ship at scale',
-  whyChooseUsText: 'From Sunderland to Singapore, leading brands choose AI-Solutions as their AI partner.',
+  whyChooseUsText: 'Worldwide, leading brands choose AI-Solutions as their AI partner.',
   bottomCtaTitle: 'Ready to bring AI into your business?',
   bottomCtaText: 'Talk to our team in Sunderland about an AI virtual assistant, a rapid prototype or a full custom build.'
 };
@@ -29,7 +29,7 @@ const defaultServices = [
     title: 'AI Virtual Assistant',
     description: 'An always-on assistant that answers inquiries, supports staff and qualifies leads — 24/7.',
     icon: 'cpu',
-    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd772?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80',
     details: 'Our Conversational AI leverages LLMs tailored to your company documentation. Supports lead routing, instant ticket triage, and conversational user registration.',
     price: 750,
     deliveryTime: '3-5 days'
@@ -39,7 +39,7 @@ const defaultServices = [
     title: 'Custom Software Development',
     description: 'Tailored applications engineered around your workflow, integrated with your stack.',
     icon: 'code',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80',
     details: 'From requirements mapping through deployment, we build robust backend architectures and clean modern frontends tailored to your operations.',
     price: 4500,
     deliveryTime: '4-6 weeks'
@@ -69,7 +69,7 @@ const defaultServices = [
     title: 'Rapid AI Prototyping',
     description: 'Validate ideas in days, not months, with affordable AI-driven prototypes.',
     icon: 'edit-3',
-    image: 'https://images.unsplash.com/photo-1581291518655-9523c932dedf?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80',
     details: 'Skip months of specification and coding. We create functional interactive prototypes using generative frameworks in a fraction of the time and cost.',
     price: 1200,
     deliveryTime: '1-2 weeks'
@@ -87,19 +87,29 @@ const defaultServices = [
 ];
 
 const defaultTeam = [
-  { name: 'Sarah Mitchell', role: 'Project Manager', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=700&fit=crop' },
-  { name: 'Daniel Okafor', role: 'Operations Manager', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=700&fit=crop' },
+  { name: 'Sarah Mitchell', role: 'Project Manager', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=700&fit=crop' },
+  { name: 'Daniel Okafor', role: 'Operations Manager', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=700&fit=crop' },
   { name: 'James Patel', role: 'Business Head', image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=600&h=700&fit=crop' },
   { name: 'Liam Chen', role: 'IT Manager', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=700&fit=crop' }
 ];
 
 const defaultTestimonials = [
   { quote: 'AI-Solutions transformed how our staff interact with our internal systems. The virtual assistant alone saved us hundreds of hours a month.', author: 'William Jackson', role: 'Product Manager', stars: 5, image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&q=80' },
-  { quote: 'Their rapid prototyping process turned a vague idea into a working AI tool we could show to investors in just two weeks.', author: 'Emma Williams', role: 'CTO, Northcoast', stars: 5, image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&q=80' }
+  { quote: 'Their rapid prototyping process turned a vague idea into a working AI tool we could show to investors in just two weeks.', author: 'Emma Williams', role: 'CTO, Northcoast', stars: 5, image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&q=80' },
+  { quote: 'The custom software and AI consultancy provided by AI-Solutions helped us optimize our workflows and double our engineering velocity.', author: 'Sarah Jenkins', role: 'Tech Lead, Prelude', stars: 5, image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&q=80' }
 ];
 
 const defaultPartners = [
-  { name: 'Boosterio' }, { name: 'SEO Mind' }, { name: 'Prelude' }, { name: 'Logoipsum' }, { name: 'JPSN' }
+  { name: 'Google' },
+  { name: 'Microsoft' },
+  { name: 'Amazon' },
+  { name: 'Apple' },
+  { name: 'Meta' },
+  { name: 'Netflix' },
+  { name: 'IBM' },
+  { name: 'Salesforce' },
+  { name: 'Oracle' },
+  { name: 'Adobe' }
 ];
 
 const defaultBlogs = [
@@ -164,6 +174,7 @@ const state = {
   partners: defaultPartners,
   notifications: [],
   inquiries: [],
+  users: [],
   chatHistory: [
     { sender: 'assistant', text: `👋 Hi, I'm Aida, your AI-Solutions assistant.\n\nI can help you with:\n• 🧠 Our services & pricing\n• 🗺️ Navigating the website\n• 📞 Getting in touch with our team\n\nWhat would you like to explore?`, time: new Date() }
   ],
@@ -221,6 +232,133 @@ function showToast(title, message, type = 'info') {
       setTimeout(() => toastEl.remove(), 300);
     }
   }, 5000);
+}
+
+// Helper to get partner SVG logo
+function getPartnerLogoSvg(name) {
+  const cleanName = name.toLowerCase().trim();
+  if (cleanName.includes('google')) {
+    return `<svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v3.92h6.69a5.74 5.74 0 0 1-2.49 3.77v3.12h4.02c2.37-2.17 3.53-5.39 3.53-8.74z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-4.02-3.12c-1.12.75-2.54 1.19-3.91 1.19-3.01 0-5.57-2.03-6.48-4.76H1.31v3.23A12.02 12.02 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.52 14.4c-.23-.69-.36-1.42-.36-2.18s.13-1.49.36-2.18V6.81H1.31A12.02 12.02 0 0 0 0 12c0 1.93.46 3.74 1.31 5.4l4.21-3.4z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0A12.02 12.02 0 0 0 1.31 6.81l4.21 3.4c.91-2.73 3.47-4.76 6.48-4.76z"/></svg>`;
+  } else if (cleanName.includes('microsoft')) {
+    return `<svg viewBox="0 0 23 23" class="w-5 h-5"><rect x="0" y="0" width="11" height="11" fill="#F25022"/><rect x="12" y="0" width="11" height="11" fill="#7FBA00"/><rect x="0" y="12" width="11" height="11" fill="#00A4EF"/><rect x="12" y="12" width="11" height="11" fill="#FFB900"/></svg>`;
+  } else if (cleanName.includes('amazon')) {
+    return `<svg viewBox="0 0 24 24" class="w-6 h-6 fill-amber-500"><path d="M18.8 17.85c-1.8 1.4-4.55 2.15-6.85 2.15-3.3 0-6.25-1.4-8-3.65-.25-.3-.05-.65.25-.45 2.45 1.45 5.7 2.3 8.85 2.3 2.1 0 4.55-.5 6.2-1.6.4-.3.75.05.3.45zM19.9 19c-.3.25-.65.1-.5-.2.4-.85.85-2.2.45-3.15-.1-.2.15-.35.35-.15.8 1 2 2.65.7 3.9-.2.2-.7 0-1-.4z"/></svg>`;
+  } else if (cleanName.includes('apple')) {
+    return `<svg viewBox="0 0 24 24" class="w-5 h-5 fill-slate-800"><path d="M12.2 2c-.6 0-1.5.5-2 1.1-.6.7-.9 1.7-.8 2.6.9.1 1.8-.4 2.3-1.1.6-.7.8-1.7.5-2.6zm3.3 3.8c-.8 0-1.8.5-2.4.5-.6 0-1.5-.5-2.2-.5-2.9 0-5 2-5 5.2 0 3.2 2 6.6 4.7 6.6.8 0 1.5-.4 2.2-.4.7 0 1.4.4 2.2.4 2.6 0 4.6-3 4.6-5.8-.1 0-2.4-.9-2.4-3.6 0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.6-3.2-1.6z"/></svg>`;
+  } else if (cleanName.includes('meta')) {
+    return `<svg viewBox="0 0 24 24" class="w-6 h-6 stroke-blue-500 fill-none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4zm0 0c2-2.67 4-4 6-4a4 4 0 1 1 0 8c-2 0-4-1.33-6-4z"/></svg>`;
+  } else if (cleanName.includes('netflix')) {
+    return `<svg viewBox="0 0 24 24" class="w-5 h-5 fill-[#E50914]"><path d="M5.5 2h4l4.5 10.5V2h4v20h-4L9.5 11.5V22h-4V2z"/></svg>`;
+  } else if (cleanName.includes('ibm')) {
+    return `<svg viewBox="0 0 24 24" class="w-6 h-6 fill-[#006699]"><path d="M2 3h20v2H2V3zm0 3h20v1H2V6zm0 2h20v2H2V8zm0 3h20v1H2v-1zm0 2h20v2H2v-2zm0 3h20v1H2v-1zm0 2h20v2H2v-2z"/></svg>`;
+  } else if (cleanName.includes('salesforce')) {
+    return `<svg viewBox="0 0 24 24" class="w-6 h-6 fill-[#00A1E0]"><path d="M12 2C8.13 2 5 5.13 5 9c0 .74.12 1.45.34 2.11C3.41 11.83 2 13.75 2 16c0 3.31 2.69 6 6 6h8c3.31 0 6-2.69 6-6 0-2.25-1.41-4.17-3.34-4.89.22-.66.34-1.37.34-2.11 0-3.87-3.13-7-7-7zm2.5 15h-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>`;
+  } else if (cleanName.includes('oracle')) {
+    return `<svg viewBox="0 0 24 24" class="w-6 h-6 fill-[#F80000]"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>`;
+  } else if (cleanName.includes('adobe')) {
+    return `<svg viewBox="0 0 24 24" class="w-6 h-6 fill-[#FF0000]"><path d="M14.58 2H22v15.35L14.58 2zM9.42 2H2v15.35L9.42 2zm2.58 6.55L17.7 22h-3.66l-2.04-5.02H7.95L12 8.55z"/></svg>`;
+  }
+  return `<i data-lucide="activity" class="w-5 h-5 text-brand-indigo"></i>`;
+}
+
+// Reusable service card template
+function createServiceCardHtml(s, isPublicGrid = false) {
+  let featuresHtml = '';
+  const titleLower = s.title.toLowerCase();
+
+  if (titleLower.includes('web') || titleLower.includes('mobile')) {
+    featuresHtml = `
+      <div class="grid grid-cols-2 gap-x-2 gap-y-1.5 pt-2 text-[11px] text-slate-600 font-medium">
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Responsive design</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> iOS & Android</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Offline support</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Push alerts</div>
+      </div>
+    `;
+  } else if (titleLower.includes('assistant') || titleLower.includes('conversational')) {
+    featuresHtml = `
+      <div class="grid grid-cols-2 gap-x-2 gap-y-1.5 pt-2 text-[11px] text-slate-600 font-medium">
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Tailored to docs</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> 24/7 support</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Lead routing</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Secure locally</div>
+      </div>
+    `;
+  } else if (titleLower.includes('custom') || titleLower.includes('software') || titleLower.includes('development')) {
+    featuresHtml = `
+      <div class="grid grid-cols-2 gap-x-2 gap-y-1.5 pt-2 text-[11px] text-slate-600 font-medium">
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Full stack build</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> API integration</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Robust engine</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> High performance</div>
+      </div>
+    `;
+  } else if (titleLower.includes('consultancy') || titleLower.includes('business')) {
+    featuresHtml = `
+      <div class="grid grid-cols-2 gap-x-2 gap-y-1.5 pt-2 text-[11px] text-slate-600 font-medium">
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Technical audit</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Workflow mapping</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Migration plans</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> ROI assessment</div>
+      </div>
+    `;
+  } else if (titleLower.includes('prototyping') || titleLower.includes('prototype')) {
+    featuresHtml = `
+      <div class="grid grid-cols-2 gap-x-2 gap-y-1.5 pt-2 text-[11px] text-slate-600 font-medium">
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Functional demos</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Fast iteration</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> User testing</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Early validation</div>
+      </div>
+    `;
+  } else if (titleLower.includes('employee') || titleLower.includes('experience')) {
+    featuresHtml = `
+      <div class="grid grid-cols-2 gap-x-2 gap-y-1.5 pt-2 text-[11px] text-slate-600 font-medium">
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Onboarding flows</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Metrics dashboard</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Auto ticketing</div>
+        <div class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Workplace ease</div>
+      </div>
+    `;
+  }
+
+  const buttonsHtml = isPublicGrid ? `
+    <div class="pt-4 border-t border-slate-100 mt-4 flex gap-2 w-full">
+      <button onclick="openServiceDetailDrawer('${s._id}')" class="flex-grow py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs text-slate-700 font-bold transition-all text-center flex items-center justify-center gap-1.5 shadow-sm">
+        <i data-lucide="info" class="w-3.5 h-3.5"></i> Read Details
+      </button>
+      <button onclick="requestServiceEstimate('${s.title}')" class="py-2.5 px-4 rounded-xl bg-brand-indigo hover:bg-brand-indigoHover text-xs text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+        <i data-lucide="calculator" class="w-3.5 h-3.5"></i> Build
+      </button>
+    </div>
+  ` : `
+    <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between w-full">
+      <span class="text-[10px] font-bold text-brand-indigo bg-brand-indigo/5 border border-brand-indigo/10 px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> ${s.deliveryTime || 'Varies'}</span>
+      <button onclick="openServiceDetailDrawer('${s._id}')" class="text-brand-indigo hover:text-brand-indigoHover transition-colors flex items-center gap-1.5 font-bold text-xs">
+        View details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+  `;
+
+  return `
+    <div class="interactive-card-light rounded-3xl overflow-hidden group flex flex-col h-full bg-white shadow-sm border border-slate-100">
+      <div class="h-48 relative overflow-hidden shrink-0">
+        <div class="absolute top-4 left-4 z-20 w-10 h-10 rounded-xl bg-[#0070F3] text-white flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <i data-lucide="${s.icon || 'cpu'}" class="w-5 h-5"></i>
+        </div>
+        <img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent z-10"></div>
+        <h3 class="absolute bottom-4 left-4 right-4 z-20 text-lg font-bold text-white leading-tight drop-shadow-sm text-left">${s.title}</h3>
+      </div>
+      <div class="p-6 flex-grow flex flex-col justify-between text-left">
+        <div class="space-y-4">
+          <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">${s.description}</p>
+          ${featuresHtml}
+        </div>
+        ${buttonsHtml}
+      </div>
+    </div>
+  `;
 }
 
 // Global Headers Helper
@@ -661,30 +799,13 @@ function appendChatBubble(sender, text, prototypeDetails = null) {
   scrollChatToBottom();
 }
 
-// Generate styled prototype Blueprint card inside chatbot
+// Generate styled action button for chat estimation plan
 function renderChatBlueprintCard(details) {
-  // Convert object data to base64 or string safely to use in click handler
   const dataString = encodeURIComponent(JSON.stringify(details));
   return `
-    <div class="mt-3 p-3 rounded-lg bg-brand-darker border border-brand-indigo/20 space-y-2 text-slate-200 text-xs shadow-md">
-      <div class="flex items-center gap-1.5 text-brand-cyan font-bold border-b border-brand-indigo/10 pb-1.5 mb-1.5">
-        <i data-lucide="cpu" class="w-4 h-4"></i>
-        <span>PROTOTYPE BLUEPRINT</span>
-      </div>
-      <div><strong>Project:</strong> ${details.projectName}</div>
-      <div><strong>Tech Stack:</strong> <span class="text-slate-300 font-mono text-[10px] bg-brand-dark px-1.5 py-0.5 rounded border border-brand-indigo/5">${details.techStack}</span></div>
-      <div><strong>Key Features:</strong>
-        <ul class="list-disc pl-4 mt-1 text-[11px] text-slate-300 space-y-0.5">
-          ${details.features.map(f => `<li>${f}</li>`).join('')}
-        </ul>
-      </div>
-      <div><strong>Schema Overview:</strong> <span class="text-slate-400 font-mono text-[9px] block bg-brand-dark p-1 rounded border border-brand-indigo/5 mt-1 overflow-x-auto">${details.databaseSchema}</span></div>
-      <div class="flex items-center justify-between pt-2 border-t border-brand-indigo/10 mt-2 text-[11px]">
-        <div>Cost: <span class="text-emerald-400 font-bold font-mono">${details.pricing}</span></div>
-        <div>Time: <span class="text-brand-cyan font-bold font-mono">${details.timeframe}</span></div>
-      </div>
-      <button onclick="saveChatBlueprint('${dataString}')" class="w-full mt-2 py-1.5 rounded bg-brand-indigo hover:bg-brand-indigo-hover text-[10px] text-white font-bold transition-colors flex items-center justify-center gap-1">
-        <i data-lucide="save" class="w-3.5 h-3.5"></i> Save Prototype to Inquiries
+    <div class="mt-2 pt-2 border-t border-brand-indigo/10">
+      <button onclick="saveChatBlueprint('${dataString}')" class="w-full py-2.5 rounded-xl bg-brand-indigo hover:bg-brand-indigo-hover text-[11px] text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow-md shadow-brand-indigo/15">
+        <i data-lucide="save" class="w-3.5 h-3.5"></i> Save this Plan to Inquiries
       </button>
     </div>
   `;
@@ -892,9 +1013,9 @@ async function handleRouting() {
   // Toggle page-level theme classes for dashboard vs public pages
   if (baseHash === 'dashboard') {
     document.body.classList.remove('bg-[#F8FAFC]', 'text-slate-800');
-    document.body.classList.add('bg-brand-deep', 'text-white');
+    document.body.classList.add('bg-brand-deep', 'text-white', 'dashboard-active');
   } else {
-    document.body.classList.remove('bg-brand-deep', 'text-white');
+    document.body.classList.remove('bg-brand-deep', 'text-white', 'dashboard-active');
     document.body.classList.add('bg-[#F8FAFC]', 'text-slate-800');
   }
   
@@ -955,6 +1076,7 @@ window.addEventListener('load', () => {
   });
 });
 
+
 // Mobile navbar menu toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
 if (mobileMenuBtn) {
@@ -971,22 +1093,7 @@ if (mobileMenuBtn) {
 
 // TEMPLATE R// View: HOME
 async function renderHome() {
-  const servicesHtml = state.services.map(s => `
-    <div class="interactive-card-light p-8 rounded-3xl flex flex-col justify-between h-full text-left">
-      <div>
-        <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-indigo flex items-center justify-center mb-5">
-          <i data-lucide="${s.icon || 'cpu'}" class="w-6 h-6"></i>
-        </div>
-        <h3 class="text-xl font-bold text-slate-900 mb-2">${s.title}</h3>
-        <p class="text-sm text-slate-500 leading-relaxed mb-4">${s.description}</p>
-      </div>
-      <div class="pt-4">
-        <a href="#services/${s._id}" class="text-brand-indigo hover:text-brand-indigoHover transition-colors flex items-center gap-1.5 font-bold text-sm">
-          Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-      </div>
-    </div>
-  `).join('');
+  const servicesHtml = state.services.map(s => createServiceCardHtml(s, false)).join('');
 
   const blogPreviewHtml = state.blogs.slice(0, 3).map(b => `
     <div class="interactive-card-light rounded-3xl overflow-hidden group flex flex-col h-full">
@@ -1014,13 +1121,13 @@ async function renderHome() {
   const heroImg = s.heroImage || "https://kindred-ai-vision.lovable.app/assets/hero-person-D8M9l6CF.jpg";
   const aboutTitle = s.aboutTitle || "We provide truly prominent AI solutions for your success";
   const aboutText = s.aboutText || "AI-Solutions is the partner of choice for leading enterprises and growing businesses...";
-  const aboutImg = s.aboutImage || "https://kindred-ai-vision.lovable.app/assets/why-choose-C6MgmLi8.jpg";
+  const aboutImg = s.aboutImage || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&h=1000&q=80";
   const reach = s.aboutGlobalReach || "Trusted by teams across the UK, EU and beyond.";
   const award = s.aboutAwardWinning || "Recognised for AI innovation in employee experience.";
   const clientsPct = s.aboutClientsPct || "98%";
   const projectsCount = s.aboutProjectsCount || "590+";
   const chooseTitle = s.whyChooseUsTitle || "Trusted by teams that ship at scale";
-  const chooseText = s.whyChooseUsText || "From Sunderland to Singapore, leading brands choose AI-Solutions as their AI partner.";
+  const chooseText = s.whyChooseUsText || "Worldwide, leading brands choose AI-Solutions as their AI partner.";
   const bottomTitle = s.bottomCtaTitle || "Ready to bring AI into your business?";
   const bottomText = s.bottomCtaText || "Talk to our team in Sunderland about an AI virtual assistant, a rapid prototype or a full custom build.";
 
@@ -1029,7 +1136,7 @@ async function renderHome() {
   const partnersHtml = doublePartners.map(p => `
     <div class="flex items-center gap-3 px-6 py-3 bg-white border border-slate-100 rounded-2xl shadow-sm text-left select-none shrink-0 min-w-[185px]">
       <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-indigo flex items-center justify-center font-extrabold text-sm shrink-0 uppercase">
-        <i data-lucide="activity" class="w-5 h-5"></i>
+        ${getPartnerLogoSvg(p.name)}
       </div>
       <div>
         <div class="text-sm font-bold text-slate-800 leading-tight">${p.name}</div>
@@ -1040,34 +1147,36 @@ async function renderHome() {
 
   // Render Team Members
   const teamHtml = state.teamMembers.map(m => `
-    <div class="flex flex-col items-center text-center group">
-      <div class="w-full h-[320px] rounded-3xl overflow-hidden shadow-md mb-4 border border-slate-100 shrink-0">
-        <img src="${m.image}" alt="${m.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    <div class="flex flex-col bg-white border border-slate-100/80 rounded-3xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+      <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative bg-slate-50">
+        <img src="${m.image}" alt="${m.name}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
       </div>
-      <h4 class="text-base font-bold text-brand-indigo mt-2 leading-snug">${m.role}</h4>
-      <span class="text-xs text-slate-500 mt-1 block">${m.name}</span>
+      <div class="text-center">
+        <h4 class="text-base font-extrabold text-brand-indigo leading-snug">${m.role}</h4>
+        <span class="text-xs font-semibold text-slate-500 mt-1 block">${m.name}</span>
+      </div>
     </div>
   `).join('');
 
   // Render Testimonials
   const testimonialsHtml = state.testimonials.map(t => {
-    const starHtml = Array(t.stars || 5).fill(0).map(() => `<i data-lucide="star" class="w-3.5 h-3.5 fill-brand-indigo text-brand-indigo"></i>`).join('');
+    const starHtml = Array(t.stars || 5).fill(0).map(() => `<i data-lucide="star" class="w-4.5 h-4.5 fill-brand-indigo text-brand-indigo"></i>`).join('');
     return `
-      <div class="snap-start shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] testimonial-card-replicated p-6 flex flex-col justify-between h-full text-left relative overflow-hidden bg-white">
+      <div class="snap-start shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] testimonial-card-replicated p-8 flex flex-col justify-between h-full text-left relative overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300">
         <div class="space-y-4">
           <div class="flex justify-between items-start">
             <div class="flex items-center gap-0.5">${starHtml}</div>
             <span class="text-sky-200/80 text-5xl font-serif leading-none mt-[-10px] select-none">”</span>
           </div>
-          <blockquote class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+          <blockquote class="text-sm sm:text-base text-slate-700 leading-relaxed font-normal italic">
             "${t.quote}"
           </blockquote>
         </div>
-        <div class="pt-4 border-t border-slate-100 mt-4 flex items-center gap-3">
-          <img src="${t.image || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop&q=80'}" alt="${t.author}" class="w-10 h-10 rounded-full object-cover shadow-sm shrink-0 border border-slate-100">
+        <div class="pt-4 border-t border-slate-100 mt-6 flex items-center gap-4">
+          <img src="${t.image || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop&q=80'}" alt="${t.author}" class="w-12 h-12 rounded-full object-cover shadow-sm shrink-0 border border-slate-100">
           <div>
-            <cite class="text-xs font-bold text-slate-900 block not-italic">${t.author}</cite>
-            <span class="text-[10px] text-slate-500 block mt-0.5">${t.role}</span>
+            <cite class="text-sm font-bold text-slate-900 block not-italic">${t.author}</cite>
+            <span class="text-xs text-slate-500 block mt-0.5">${t.role}</span>
           </div>
         </div>
       </div>
@@ -1133,7 +1242,7 @@ async function renderHome() {
           <!-- About Left Column (Tablet User Image) -->
           <div class="relative w-full max-w-lg mx-auto lg:max-w-none flex justify-center">
             <div class="w-full h-[450px] rounded-3xl overflow-hidden shadow-md relative border border-slate-100">
-              <img src="${aboutImg}" alt="Why choose AI-Solutions" class="w-full h-full object-cover">
+              <img src="${aboutImg}" alt="Why choose AI-Solutions" class="w-full h-full object-cover object-center">
             </div>
           </div>
 
@@ -1194,7 +1303,7 @@ async function renderHome() {
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-none">AI Solutions Tailored to You</h2>
           <p class="text-slate-500 text-sm max-w-xl mx-auto">From virtual assistants to rapid prototyping, we deliver the AI capabilities your business needs to thrive.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           ${servicesHtml || `
             <div class="col-span-full text-center text-slate-500 py-12">No services available. Seeding required.</div>
           `}
@@ -1246,7 +1355,7 @@ async function renderHome() {
         </div>
         
         <!-- Responsive Testimonial Slider Wrapper -->
-        <div class="relative max-w-5xl mx-auto px-6 group">
+        <div class="relative max-w-7xl mx-auto px-6 group">
           <!-- Prev Button -->
           <button id="testimonial-prev" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-brand-indigo hover:border-brand-indigo hover:scale-105 transition-all shadow-md" title="Previous Testimonials">
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
@@ -1279,7 +1388,7 @@ async function renderHome() {
             Browse All Articles <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           ${blogPreviewHtml || `
             <div class="col-span-full text-center text-slate-505 py-8">
               Check back soon for new publications.
@@ -1335,14 +1444,15 @@ async function renderHome() {
 
 // View: ABOUT US
 async function renderAbout() {
-
   const teamHtml = state.teamMembers.map(m => `
-    <div class="flex flex-col items-center text-center group">
-      <div class="w-full h-[320px] rounded-3xl overflow-hidden shadow-md mb-4 border border-slate-100 shrink-0">
-        <img src="${m.image}" alt="${m.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    <div class="flex flex-col bg-white border border-slate-100/80 rounded-3xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+      <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative bg-slate-50">
+        <img src="${m.image}" alt="${m.name}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
       </div>
-      <h4 class="text-base font-bold text-brand-indigo mt-2 leading-snug">${m.role}</h4>
-      <span class="text-xs text-slate-500 mt-1 block">${m.name}</span>
+      <div class="text-center">
+        <h4 class="text-base font-extrabold text-brand-indigo leading-snug">${m.role}</h4>
+        <span class="text-xs font-semibold text-slate-500 mt-1 block">${m.name}</span>
+      </div>
     </div>
   `).join('');
 
@@ -1387,7 +1497,7 @@ async function renderAbout() {
       <!-- Core Values -->
       <div class="pt-8">
         <h3 class="text-xl font-bold text-center text-slate-900 mb-8">Guided by Three Principles</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="bg-[#F8FAFC] p-6 rounded-2xl border border-slate-100 space-y-3 shadow-sm">
             <div class="w-10 h-10 rounded-lg bg-blue-50 text-brand-indigo flex items-center justify-center"><i data-lucide="zap" class="w-5 h-5"></i></div>
             <h4 class="text-base font-bold text-slate-900">Velocity Over Red-Tape</h4>
@@ -1426,73 +1536,33 @@ async function renderServices() {
   fetchServices().then(() => {
     const container = document.getElementById('services-grid-container');
     if (container) {
-      container.innerHTML = state.services.map(s => `
-        <div class="interactive-card-light p-6 rounded-2xl flex flex-col justify-between h-full text-left">
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-indigo flex items-center justify-center mb-5">
-              <i data-lucide="${s.icon || 'cpu'}" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">${s.title}</h3>
-            <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-3">${s.description}</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-[10px] font-bold text-brand-indigo bg-brand-indigo/5 border border-brand-indigo/10 px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> ${s.deliveryTime || 'Varies'}</span>
-              <span class="text-[10px] font-bold text-brand-cyan bg-[#e0f2fe] text-brand-cyan border border-brand-cyan/10 px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="tag" class="w-3 h-3"></i> Est. from £${s.price || 'Free'}</span>
-            </div>
-          </div>
-          <div class="pt-4 border-t border-slate-100 mt-4 flex gap-3">
-            <button onclick="openServiceDetailDrawer('${s._id}')" class="flex-1 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-xs text-slate-700 font-semibold transition-all text-center flex items-center justify-center gap-1.5 shadow-sm">
-              <i data-lucide="info" class="w-3.5 h-3.5"></i> Read Details
-            </button>
-            <button onclick="requestServiceEstimate('${s.title}')" class="py-2 px-4 rounded-lg bg-brand-indigo hover:bg-brand-indigoHover text-xs text-white font-bold transition-all flex items-center justify-center gap-1 shadow-sm">
-              <i data-lucide="calculator" class="w-3.5 h-3.5"></i> Build
-            </button>
-          </div>
-        </div>
-      `).join('');
+      container.innerHTML = state.services.map(s => createServiceCardHtml(s, true)).join('');
       lucide.createIcons();
     }
   });
 
-  const servicesHtml = state.services.map(s => `
-    <div class="interactive-card-light p-6 rounded-2xl flex flex-col justify-between h-full text-left">
-      <div>
-        <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-indigo flex items-center justify-center mb-5">
-          <i data-lucide="${s.icon || 'cpu'}" class="w-6 h-6"></i>
-        </div>
-        <h3 class="text-xl font-bold text-slate-900 mb-2">${s.title}</h3>
-        <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-3">${s.description}</p>
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="text-[10px] font-bold text-brand-indigo bg-brand-indigo/5 border border-brand-indigo/10 px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> ${s.deliveryTime || 'Varies'}</span>
-          <span class="text-[10px] font-bold text-brand-cyan bg-[#e0f2fe] text-[#0284c7] border border-[#bae6fd] px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="tag" class="w-3 h-3"></i> Est. from £${s.price || 'Free'}</span>
-        </div>
-      </div>
-      <div class="pt-4 border-t border-slate-100 mt-4 flex gap-3">
-        <button onclick="openServiceDetailDrawer('${s._id}')" class="flex-1 py-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-xs text-slate-700 font-semibold transition-all text-center flex items-center justify-center gap-1.5 shadow-sm">
-          <i data-lucide="info" class="w-3.5 h-3.5"></i> Read Details
-        </button>
-        <button onclick="requestServiceEstimate('${s.title}')" class="py-2 px-4 rounded-lg bg-brand-indigo hover:bg-brand-indigoHover text-xs text-white font-bold transition-all flex items-center justify-center gap-1 shadow-sm">
-          <i data-lucide="calculator" class="w-3.5 h-3.5"></i> Build
-        </button>
-      </div>
-    </div>
-  `).join('');
+  const servicesHtml = state.services.map(s => createServiceCardHtml(s, true)).join('');
 
   viewport.innerHTML = `
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 space-y-12 bg-white border border-slate-100 shadow-sm rounded-3xl mt-12 mb-12">
-      <!-- Title -->
-      <div class="text-center space-y-4">
-        <span class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-blue-50 text-brand-indigo text-xs font-bold uppercase tracking-wider">Services Portfolio</span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 leading-tight">Software Architectures We Deploy</h1>
-        <p class="text-slate-500 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-          From LLM virtual support agents to rapid layout prototyping pipelines, discover our engineering offerings.
+    <section class="bg-brand-deep py-20 relative overflow-hidden text-center text-white border-b border-brand-indigo/10">
+      <div class="glow-bg top-0 left-1/4 opacity-30"></div>
+      <div class="glow-bg bottom-0 right-1/4 opacity-30"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
+        <span class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-brand-indigo/15 text-brand-indigo text-xs font-bold uppercase tracking-wider border border-brand-indigo/35">Our Services</span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight">AI services that move your business forward</h1>
+        <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          From virtual assistants to custom AI software, we deliver capabilities tailored to your organisation.
         </p>
       </div>
+    </section>
 
-      <!-- Cards Grid -->
-      <div id="services-grid-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        ${servicesHtml || `
-          <div class="col-span-full text-center text-slate-500 py-12">No services available. Seeding required.</div>
-        `}
+    <section class="bg-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="services-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          ${servicesHtml || `
+            <div class="col-span-full text-center text-slate-500 py-12">No services available. Seeding required.</div>
+          `}
+        </div>
       </div>
     </section>
   `;
@@ -1782,7 +1852,7 @@ async function renderBlogs() {
       </div>
 
       <!-- Blogs Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="blog-cards-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-cards-grid">
         <!-- Injected via helper -->
       </div>
     </section>
@@ -1946,7 +2016,7 @@ async function renderGallery() {
       </div>
 
       <!-- Gallery Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="gallery-items-grid">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-items-grid">
         <!-- Injected via helper -->
       </div>
     </section>
@@ -2173,9 +2243,9 @@ async function renderAuth() {
             </p>
           </div>
           
-          <!-- Bottom metadata text or status -->
-          <div class="text-xs text-slate-500 relative z-10">
-            Sunderland Database Node Active
+          <!-- Bottom Metadata -->
+          <div class="text-[10px] text-slate-400 relative z-10 pt-4 border-t border-white/10 mt-auto">
+            &copy; 2026 AI-Solutions. All rights reserved.
           </div>
         </div>
 
@@ -2477,11 +2547,12 @@ function renderDashboardSidebar() {
   if (isAdmin) {
     tabs = [
       { id: 'profile', label: 'Admin Info', icon: 'shield' },
+      { id: 'manage-users', label: 'Manage Users', icon: 'users' },
       { id: 'manage-services', label: 'Manage Services', icon: 'cpu' },
       { id: 'manage-blogs', label: 'Manage Blogs', icon: 'file-text' },
       { id: 'manage-events', label: 'Manage Events', icon: 'calendar' },
       { id: 'manage-gallery', label: 'Manage Gallery', icon: 'image' },
-      { id: 'manage-team', label: 'Manage Team', icon: 'users' },
+      { id: 'manage-team', label: 'Manage Team', icon: 'user-check' },
       { id: 'manage-testimonials', label: 'Manage Testimonials', icon: 'message-square' },
       { id: 'manage-partners', label: 'Manage Partners', icon: 'link' },
       { id: 'manage-contacts', label: 'Manage Inquiries', icon: 'mail' },
@@ -2521,6 +2592,7 @@ function switchDashboardTab(tabId) {
   // Trigger tab content rendering
   const tabViewports = {
     'profile': renderDashProfile,
+    'manage-users': renderDashManageUsers,
     'manage-services': renderDashManageServices,
     'manage-blogs': renderDashManageBlogs,
     'manage-events': renderDashManageEvents,
@@ -4424,26 +4496,26 @@ function renderTestimonialFormModal(item = null) {
         <form id="testimonial-crud-form" class="space-y-4 text-xs">
           <div class="space-y-1.5">
             <label class="text-slate-400 font-bold uppercase">Quote Text</label>
-            <textarea id="mt-quote" rows="4" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" required>${item ? item.quote : ''}</textarea>
+            <textarea id="mr-quote" rows="4" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" required>${item ? item.quote : ''}</textarea>
           </div>
 
           <div class="space-y-1.5">
             <label class="text-slate-400 font-bold uppercase">Author Name</label>
-            <input type="text" id="mt-author" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.author : ''}" required>
+            <input type="text" id="mr-author" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.author : ''}" required>
           </div>
 
           <div class="space-y-1.5">
             <label class="text-slate-400 font-bold uppercase">Role / Company</label>
-            <input type="text" id="mt-role-company" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.role : ''}" required>
+            <input type="text" id="mr-role-company" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.role : ''}" required>
           </div>
 
           <div class="space-y-1.5">
             <label class="text-slate-400 font-bold uppercase">Rating Stars (1-5)</label>
-            <input type="number" id="mt-stars" min="1" max="5" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.stars : 5}" required>
+            <input type="number" id="mr-stars" min="1" max="5" class="w-full bg-brand-dark border border-brand-indigo/10 rounded-lg px-3 py-2 text-white" value="${item ? item.stars : 5}" required>
           </div>
 
           <div class="space-y-1.5">
-            ${createImageUploaderHtml('mt-image', 'Author Photo', item ? item.image : '')}
+            ${createImageUploaderHtml('mr-image', 'Author Photo', item ? item.image : '')}
           </div>
 
           <button type="submit" class="w-full py-3 bg-brand-indigo hover:bg-brand-indigo-hover text-white font-bold rounded-xl transition-all shadow-md mt-2 flex items-center justify-center gap-1.5">
@@ -4458,11 +4530,11 @@ function renderTestimonialFormModal(item = null) {
   document.getElementById('testimonial-crud-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const payload = {
-      quote: document.getElementById('mt-quote').value.trim(),
-      author: document.getElementById('mt-author').value.trim(),
-      role: document.getElementById('mt-role-company').value.trim(),
-      stars: Number(document.getElementById('mt-stars').value),
-      image: document.getElementById('mt-image').value.trim()
+      quote: document.getElementById('mr-quote').value.trim(),
+      author: document.getElementById('mr-author').value.trim(),
+      role: document.getElementById('mr-role-company').value.trim(),
+      stars: Number(document.getElementById('mr-stars').value),
+      image: document.getElementById('mr-image').value.trim()
     };
 
     const url = isEdit ? `${API_URL}/testimonials/${item._id}` : `${API_URL}/testimonials`;
@@ -4634,3 +4706,182 @@ function renderPartnerFormModal(item = null) {
     }
   });
 }
+
+// View: MANAGE USERS
+async function renderDashManageUsers() {
+  const contentEl = document.getElementById('dash-content-viewport');
+  if (!contentEl) return;
+
+  try {
+    const res = await fetch(`${API_URL}/auth/users`, {
+      headers: getHeaders()
+    });
+    const data = await res.json();
+    if (data.success) {
+      state.users = data.data;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  const rows = state.users.map(u => `
+    <tr class="border-b border-brand-indigo/5 text-xs hover:bg-brand-dark/20">
+      <td class="px-6 py-4">
+        <div class="font-bold text-white">${u.name}</div>
+      </td>
+      <td class="px-6 py-4 text-slate-400 font-medium">${u.email}</td>
+      <td class="px-6 py-4">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+          u.role === 'admin' 
+            ? 'bg-brand-indigo/20 text-brand-indigo border border-brand-indigo/35' 
+            : 'bg-slate-800 text-slate-350 border border-slate-700'
+        }">${u.role}</span>
+      </td>
+      <td class="px-6 py-4 flex gap-2">
+        <button onclick="editUserModal('${u._id}')" class="px-2.5 py-1.5 bg-brand-indigo/10 border border-brand-indigo/20 rounded-md hover:bg-brand-indigo text-slate-200 hover:text-white transition-all font-semibold">Edit</button>
+        <button onclick="deleteUserTrigger('${u._id}')" class="px-2.5 py-1.5 bg-rose-500/10 border border-rose-500/20 rounded-md hover:bg-rose-500 text-slate-200 hover:text-white transition-all font-semibold" ${state.user?.id === u._id ? 'disabled title="Cannot delete self"' : ''}>Delete</button>
+      </td>
+    </tr>
+  `).join('');
+
+  contentEl.innerHTML = `
+    <div class="space-y-6 animate-fade-in text-left">
+      <div class="flex items-center justify-between border-b border-brand-indigo/10 pb-4">
+        <div>
+          <h3 class="text-2xl font-extrabold text-white">Manage Users</h3>
+          <p class="text-xs text-slate-400 mt-1">Admin control board to manage registered users and role permissions.</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto border border-brand-indigo/10 rounded-2xl bg-brand-darker/30">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-brand-dark/40 border-b border-brand-indigo/10 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+              <th class="px-6 py-4">Name</th>
+              <th class="px-6 py-4">Email</th>
+              <th class="px-6 py-4">Role</th>
+              <th class="px-6 py-4">Controls</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows || '<tr><td colspan="4" class="px-6 py-8 text-center text-slate-500">No registered users found.</td></tr>'}
+          </tbody>
+        </table>
+      </div>
+
+      <div id="crud-modal-container"></div>
+    </div>
+  `;
+  lucide.createIcons();
+}
+
+// Edit User Modal
+function editUserModal(userId) {
+  const user = state.users.find(u => u._id === userId);
+  if (!user) return;
+
+  const container = document.getElementById('crud-modal-container');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div id="crud-modal-backdrop" class="fixed inset-0 bg-brand-dark/65 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 flex items-center justify-center p-4">
+      <div id="crud-modal-card" class="bg-brand-deep border border-brand-indigo/15 rounded-3xl w-full max-w-md overflow-hidden transform scale-95 opacity-0 transition-all duration-300 shadow-2xl p-6 relative">
+        <button onclick="closeCrudModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-all"><i data-lucide="x" class="w-5 h-5"></i></button>
+        
+        <h4 class="text-lg font-extrabold text-white mb-1">Edit User Profile</h4>
+        <p class="text-xs text-slate-400 mb-6">Modify details or roles of registered portal account.</p>
+        
+        <form id="edit-user-form" class="space-y-4 text-left">
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Full Name</label>
+            <input type="text" id="eu-name" value="${user.name}" required class="w-full px-4 py-3 bg-brand-darker/60 border border-brand-indigo/15 rounded-xl text-xs text-white focus:outline-none focus:border-brand-indigo transition-all">
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Email Address</label>
+            <input type="email" id="eu-email" value="${user.email}" required class="w-full px-4 py-3 bg-brand-darker/60 border border-brand-indigo/15 rounded-xl text-xs text-white focus:outline-none focus:border-brand-indigo transition-all">
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">User Role</label>
+            <select id="eu-role" class="w-full px-4 py-3 bg-brand-darker/60 border border-brand-indigo/15 rounded-xl text-xs text-white focus:outline-none focus:border-brand-indigo transition-all">
+              <option value="user" ${user.role === 'user' ? 'selected' : ''}>Standard User</option>
+              <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Administrator</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="w-full py-3.5 bg-brand-indigo hover:bg-brand-indigo-hover text-white text-xs font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-1.5 mt-6">
+            <i data-lucide="check-circle" class="w-4 h-4"></i> Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+  `;
+
+  // Animate Open
+  setTimeout(() => {
+    document.getElementById('crud-modal-backdrop')?.classList.remove('opacity-0');
+    document.getElementById('crud-modal-card')?.classList.remove('scale-95', 'opacity-0');
+  }, 50);
+
+  lucide.createIcons();
+
+  // Submit Handler
+  document.getElementById('edit-user-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      name: document.getElementById('eu-name').value.trim(),
+      email: document.getElementById('eu-email').value.trim(),
+      role: document.getElementById('eu-role').value
+    };
+
+    try {
+      const res = await fetch(`${API_URL}/auth/users/${user._id}`, {
+        method: 'PUT',
+        headers: getHeaders(),
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        showToast('User Updated', `Account for "${payload.name}" has been modified successfully.`, 'success');
+        closeCrudModal();
+        renderDashManageUsers();
+      } else {
+        showToast('Error', data.message || 'Update failed.', 'error');
+      }
+    } catch (err) {
+      console.error(err);
+      showToast('Network Error', 'Cannot link to database servers.', 'error');
+    }
+  });
+}
+
+// Delete User Trigger
+async function deleteUserTrigger(userId) {
+  if (state.user?.id === userId) {
+    showToast('Action Denied', 'You cannot delete your own admin account.', 'error');
+    return;
+  }
+
+  const user = state.users.find(u => u._id === userId);
+  if (!user) return;
+
+  const confirmDelete = confirm(`Are you sure you want to permanently delete user "${user.name}" (${user.email})? This action cannot be undone.`);
+  if (!confirmDelete) return;
+
+  try {
+    const res = await fetch(`${API_URL}/auth/users/${userId}`, {
+      method: 'DELETE',
+      headers: getHeaders()
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('User Deleted', `Account "${user.name}" removed successfully.`, 'success');
+      renderDashManageUsers();
+    } else {
+      showToast('Error', data.message || 'Deletion failed.', 'error');
+    }
+  } catch (err) {
+    console.error(err);
+    showToast('Network Error', 'Cannot link to database servers.', 'error');
+  }
+}
+
